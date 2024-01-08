@@ -41,7 +41,7 @@ eks-basic-class - EKS를 처음 접하는 분
 
 #### 쿠버네티스에서 컨테이너 동작 Flow
 
-<center><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fy8SDd%2Fbtrw2NujVjE%2FY7wFvnKBiqUyCuShKE0Uc0%2Fimg.png" width="200" height="300"/></center> 
+<p align="center"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fy8SDd%2Fbtrw2NujVjE%2FY7wFvnKBiqUyCuShKE0Uc0%2Fimg.png" width="200" height="300"/></p>
 
 1. kubectl issues REST call : kubectl 명령이 Master Node(혹은 Control-plane)으로 전달됩니다.  
 Master에는 REST API Server가 있어서 kubectl의 명령어를 받아들입니다.  
