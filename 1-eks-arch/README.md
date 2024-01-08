@@ -7,6 +7,20 @@ eks-basic-class - EKS를 처음 접하는 분
 [architecture-docs](https://www.redhat.com/ko/topics/containers/kubernetes-architecture)
 
 ![img](https://www.redhat.com/rhdc/managed-files/kubernetes_diagram-v3-770x717_0.svg)
+
+### eks endpoint architecture 종류
+- Public endpoint only
+<center><img src="https://d2908q01vomqb2.cloudfront.net/fe2ef495a1152561572949784c16bf23abb28057/2020/04/10/endpoint_public.png" width="700" height="400"/></center>  
+
+- Public and Private endpoints
+<center><img src="https://d2908q01vomqb2.cloudfront.net/fe2ef495a1152561572949784c16bf23abb28057/2020/04/10/endpoint_pubprivate.png" width="700" height="400"/></center>  
+
+- Private endpoint only  
+<center><img src="https://d2908q01vomqb2.cloudfront.net/fe2ef495a1152561572949784c16bf23abb28057/2020/04/10/endpoint_private.png" width="700" height="400"/></center>  
+
+
+
+
 #### control plane
 - kube-apiserver : 
 쿠버네티스 클러스터와 상호 작용해야 하나요? API에 요청하세요. 쿠버네티스 API는 쿠버네티스 컨트롤 플레인의 프론트엔드로, 내부 및 외부 요청을 처리합니다. API 서버는 요청이 유효한지 판별하고 유효한 요청을 처리합니다. <U>REST 호출이나 kubectl 커맨드라인 인터페이스 또는 kubeadm과 같은 기타 CLI(command-line interface)를 통해 API에 액세스할 수 있습니다.</U>
