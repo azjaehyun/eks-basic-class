@@ -8,19 +8,24 @@ eks-basic-class - EKS를 처음 접하는 분
 
 ![img](https://www.redhat.com/rhdc/managed-files/kubernetes_diagram-v3-770x717_0.svg)
 
+---
+
 ### eks endpoint architecture 종류
 - [Public endpoint only](https://aws.amazon.com/ko/about-aws/whats-new/2019/12/amazon-eks-enables-network-access-restrictions-to-kubernetes-cluster-public-endpoints/)
  
 
 - Public and Private endpoints (일반적인 웹서비스 구축시 사용)
-<center><img src="https://d2908q01vomqb2.cloudfront.net/fe2ef495a1152561572949784c16bf23abb28057/2020/04/10/endpoint_pubprivate.png" width="700" height="400"/></center>  
+<p align="center"><img src="https://d2908q01vomqb2.cloudfront.net/fe2ef495a1152561572949784c16bf23abb28057/2020/04/10/endpoint_pubprivate.png" width="700" height="400"/></p>  
 
-<center><img src="https://devblog.kakaostyle.com/img/content/2022-03-31-2/2022-03-31-2-01.png" width="500" height="400"/></center> 
+<p align="center">아래는 public and private 구성 infra arch 구조</p>
+<p align="center"><img src="https://devblog.kakaostyle.com/img/content/2022-03-31-2/2022-03-31-2-01.png" width="500" height="400"/></p>  
+
 
 - Private endpoint only  (보안이 중요한 서비스 - 금융)
-<center><img src="https://d2908q01vomqb2.cloudfront.net/fe2ef495a1152561572949784c16bf23abb28057/2020/04/10/endpoint_private.png" width="700" height="400"/></center>  
+<p align="center"><img src="https://d2908q01vomqb2.cloudfront.net/fe2ef495a1152561572949784c16bf23abb28057/2020/04/10/endpoint_private.png" width="700" height="400"/></p>  
 
 
+---
 
 
 #### control plane
@@ -36,6 +41,8 @@ eks-basic-class - EKS를 처음 접하는 분
 
 - etcd : 
 <U>설정 데이터와 클러스터의 상태에 관한 정보는 키-값 저장소 데이터베이스인 etcd에 상주합니다. </U>내결함성을 갖춘 분산형 etcd는 클러스터에 관한 궁극적 정보 소스(Source Of Truth, SOT)가 되도록 설계되었습니다.
+
+---
 
 
 #### 쿠버네티스 노드 개념과 특징
@@ -54,6 +61,7 @@ eks-basic-class - EKS를 처음 접하는 분
 - kube-proxy :
 각 컴퓨팅 노드에는 쿠버네티스 네트워킹 서비스를 용이하게 하기 위한 네트워크 프록시인 kube-proxy도 있습니다. kube-proxy는 운영 체제의 패킷 필터링 계층에 의존하거나 트래픽 자체를 전달하여 클러스터 내부 또는 외부의 네트워크 통신을 처리합니다.
 
+---
 
 #### 쿠버네티스에서 컨테이너 동작 Flow
 
@@ -63,29 +71,30 @@ eks-basic-class - EKS를 처음 접하는 분
 Master에는 REST API Server가 있어서 kubectl의 명령어를 받아들입니다.  
 
 
-<center><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbWBiad%2FbtrwUkUw7qx%2FdGp1AogykknAQiBMWwJVnK%2Fimg.png" width="500" height="300"/></center>  
+<p align="center"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbWBiad%2FbtrwUkUw7qx%2FdGp1AogykknAQiBMWwJVnK%2Fimg.png" width="500" height="300"/></p>  
 
 2. Pod created and scheduled to a worker node : 작업 중인 Node 중 어느 노드에 파드가 생성되면 좋을지 Scheduler에게 요청합니다.  
 Scheduler는 노드들의 상태들을 보고 어느 노드가 가장 놓을지 선택 후 응답을합니다.
 
 
-<center><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fctw5G0%2FbtrwRxUECZz%2FJH2RjAndNPidPzaRRleaW0%2Fimg.png" width="500" height="300"/></center>  
+<p align="center"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fctw5G0%2FbtrwRxUECZz%2FJH2RjAndNPidPzaRRleaW0%2Fimg.png" width="500" height="300"/></p>  
 
 3. Kubelet is notified : Scheduler가 Pod를 생성하기 적당한 노드를 찾아 해당 노드의 kubelet에 파드 생성 요청을 합니다.
 
 
-<center><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDc6p2%2FbtrwRxAhu9S%2FoLEidKMVFCP8ulJdQon5IK%2Fimg.png" width="350" height="200"/></center>  
+<p align="center"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDc6p2%2FbtrwRxAhu9S%2FoLEidKMVFCP8ulJdQon5IK%2Fimg.png" width="350" height="200"/></p>  
 
 4. kubelet instructs Docker to run the image : Pod 생성 요청을 받은 kublet이 Docker 데몬에게 실제 컨테이너의 생성을 요청합니다.
 
 
-<center><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb6d9sk%2FbtrwVcnRaLT%2FJu4xTVO3mbwnbfXzkJ9Eak%2Fimg.png" width="350" height="300"/></center> 
+<p align="center"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb6d9sk%2FbtrwVcnRaLT%2FJu4xTVO3mbwnbfXzkJ9Eak%2Fimg.png" width="350" height="300"/></p> 
 
 5. Docker pulls and runs nginx : 컨테이너 생성 요청을 받은 Docker 데몬이 Docker Hub에서 이미지를 찾아서 이미지를 생성합니다.
 이렇게 생성된 컨테이너를 쿠버네티스에서는 'Pod'라는 단위로 관리합니다.
 
 
+---
 
 #### K8s 동작 flow Image
-<center><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fcy3GnE%2Fbtrh3qU6hMK%2Fkul5MSr7mnqF6kmE7i0m9K%2Fimg.png" width="700" height="500"/></center> 
+<p align="center"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fcy3GnE%2Fbtrh3qU6hMK%2Fkul5MSr7mnqF6kmE7i0m9K%2Fimg.png" width="700" height="500"/></p> 
 
