@@ -27,9 +27,9 @@ echo "테라폼 cli 설치가 필요하시면 y를 입력해주세요"
 read terra_y_value
 if [ "$terra_y_value" == "y" ]; then
     echo "terraform cli 설치를 시작합니다."
-    curl -sO https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_darwin_amd64.zip
-    unzip terraform_0.12.24_darwin_amd64.zip
-    mv terraform /usr/local/bin
+    wget https://releases.hashicorp.com/terraform/0.14.7/terraform_0.14.7_linux_amd64.zip
+    unzip terraform_0.14.7_linux_amd64.zip
+    sudo mv terraform /usr/local/bin/
     terraform --version
 else
     echo "설치는 pass"
