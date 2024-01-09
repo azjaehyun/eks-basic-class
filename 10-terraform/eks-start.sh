@@ -39,7 +39,7 @@ echo "********************** Terraform install finish ***********************"
 
 
 echo "********************** VPC Make Starting ***********************"
-cd arch/terraform-middle/dev/20-vpc-subnet-eks-bastion   
+cd ./arch/terraform-middle/dev/20-vpc-subnet-eks-bastion   
 pwd
 cat terraform.tfvars
 echo "테라폼 벨류 설정 파일이 맞으면 y를 눌러주세요"
@@ -58,7 +58,7 @@ echo "********************** VPC Make End ***********************"
 
 
 echo "********************** EKS Make Starting ***********************"
-cd arch/terraform-middle/dev/40-eks-getting-started
+cd ./arch/terraform-middle/dev/40-eks-getting-started
 pwd
 cat terraform.tfvars
 echo "테라폼 벨류 설정 파일이 맞으면 y를 눌러주세요"
