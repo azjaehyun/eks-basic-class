@@ -1,9 +1,9 @@
 #!/bin/bash
-echo "********************** ENV setting ***********************"
-echo "*************** insert access_key ***********************************"
-read access_key
-echo "*************** insert secret_key ***********************************"
-read secret_key
+# echo "********************** ENV setting ***********************"
+# echo "*************** insert access_key ***********************************"
+# read access_key
+# echo "*************** insert secret_key ***********************************"
+# read secret_key
 
 echo "********************** Make AWS credentials Setting ***********************"
 
@@ -39,9 +39,7 @@ echo "********************** Terraform install finish ***********************"
 
 
 echo "********************** VPC Make Starting ***********************"
-cd ./arch/terraform-middle/dev/20-vpc-subnet-eks-bastion   
-pwd
-cat terraform.tfvars
+cat ./arch/terraform-middle/dev/20-vpc-subnet-eks-bastion/terraform.tfvars
 echo "테라폼 벨류 설정 파일이 맞으면 y를 눌러주세요"
 read y_value
 
@@ -58,9 +56,7 @@ echo "********************** VPC Make End ***********************"
 
 
 echo "********************** EKS Make Starting ***********************"
-cd ./arch/terraform-middle/dev/40-eks-getting-started
-pwd
-cat terraform.tfvars
+cat ./arch/terraform-middle/dev/40-eks-getting-started/terraform.tfvars
 echo "테라폼 벨류 설정 파일이 맞으면 y를 눌러주세요"
 read y_value
 
