@@ -1,18 +1,9 @@
 #!/bin/bash
-# echo "********************** ENV setting ***********************"
-# echo "*************** insert access_key ***********************************"
-# read access_key
-# echo "*************** insert secret_key ***********************************"
-# read secret_key
-
 echo "********************** Make AWS credentials Setting ***********************"
-
 aws configure
-
 
 echo "********************** Show AWS credentials  ***********************"
 echo ~/.aws/credentials
-
 echo "********************************************************************"
 
 
