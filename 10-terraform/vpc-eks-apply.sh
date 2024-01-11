@@ -10,12 +10,6 @@ echo "********************** Make AWS credentials Setting **********************
 aws configure
 
 
-
-# cat <<EOF > ~/.aws/credentials-sh
-# [eks-start-profile]
-# aws_access_key_id = ${access_key}
-# aws_secret_access_key = ${secret_key}
-# EOF
 echo "********************** Show AWS credentials  ***********************"
 echo ~/.aws/credentials
 
@@ -45,12 +39,12 @@ read y_value
 
 if [ "$y_value" == "y" ]; then
     echo "VPC 및 bastion 서버 생성을 실행합니다."
+    terraform -chdir=arch/terraform-middle/dev/20-vpc-subnet-eks-bastion init
+    terraform -chdir=arch/terraform-middle/dev/20-vpc-subnet-eks-bastion apply --auto-approve
 else
     echo ""
     # 추가로 실행할 명령어를 여기에 추가하세요
 fi
-terraform init
-terraform apply
 echo "********************** VPC Make End ***********************"
 
 
@@ -62,11 +56,11 @@ read y_value
 
 if [ "$y_value" == "y" ]; then
     echo "EKS를 생성합니다."
+    terraform -chdir=arch/terraform-middle/dev/40-eks-getting-started init
+    terraform -chdir=arch/terraform-middle/dev/40-eks-getting-started apply --auto-approve
 else
     exit 0
     # 추가로 실행할 명령어를 여기에 추가하세요
 fi
-terraform init
-terraform apply
 echo "********************** EKS Make End ***********************"
 
