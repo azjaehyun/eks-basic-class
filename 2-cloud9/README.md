@@ -26,6 +26,8 @@ source ~/.bash_profile
 complete -C '/usr/local/bin/aws_completer' aws
 ```
 
+
+
 3. kubectl install
 ```
 cd ~
@@ -59,3 +61,11 @@ curl -sL https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Li
 k9s
 k9s 단춬키는 ? 입력후 엔터
 ```
+
+
+6. ETC. (packer and ansible install)
+ansible & packer install
+sudo apt install software-properties-common
+sudo add-apt-repository --yes --update ppa:ansible/ansible
+sudo apt-get install -y ansible
+sudo apt-get install -y packer

@@ -1,6 +1,6 @@
 # resource : https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip
 resource "aws_eip" "eip-template" {
-  vpc = true
+  domain = "vpc"
   lifecycle {
     create_before_destroy = true
   }
