@@ -7,7 +7,7 @@ context = {
     project                 = "eks-init"
     environment             = "dev"
     env_alias               = "d"
-    owner                   = "jaehyun.yang@bespinglobal.com"
+    owner                   = "jaehyun.yang"
     team_name               = "Devops CNE Team"
     team                    = "CNE"
     generator_date          = "20240108"
@@ -17,4 +17,4 @@ context = {
 
 # vpc prefix ip
 vpc_cidr = "40.40"
-keypair_name = "eks-key"
+

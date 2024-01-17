@@ -1,5 +1,10 @@
 # cloud9 IDE 환경 구성
 
+git clone
+```
+https://github.com/azjaehyun/eks-basic-class.git
+```
+
 1. Cloud9 구성 설정 
 - 리전 오레곤 선택 ( us-west-2 선택!! 이유는 가격이 젤쌈 ^^)
 - service에서 cloud9 검색 -> 오른쪽 주황색 환경 생성 버튼 클릭
@@ -87,4 +92,6 @@ aws ec2 import-key-pair --key-name {your_keyname} --public-key-material fileb://
 EX)
 ssh-keygen -t rsa -b 2048 -m pem -f ~/.ssh/aws-test
 aws ec2 import-key-pair --key-name aws-test --public-key-material fileb://~/.ssh/aws-test.pub
+
+
 ```
