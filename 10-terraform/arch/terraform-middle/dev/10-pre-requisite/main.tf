@@ -4,6 +4,6 @@ resource "tls_private_key" "this" {
 }
 
 resource "aws_key_pair" "this" {
-  key_name    = "${local.name_prefix}-${owner}-keypair"
-  public_key  = file("${path.module}/template/"${local.name_prefix}-keypair".pub")  ## 본인이 생성한 이름으로 변경 
+  key_name    = "${local.name_prefix}-${var.context.owner}-keypair"
+  public_key  = file("${path.module}/template/${var.context.owner}-keypair.pub")  ## 본인이 생성한 이름으로 변경 
 }
