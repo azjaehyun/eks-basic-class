@@ -8,7 +8,7 @@ packer {
 }
 
 source "amazon-ebs" "amzn2" {
-  ami_name      = "bastion-packer-aws-linux" # modify
+  ami_name      = "bastion-packer-ubuntu" # modify
   instance_type = "t2.micro"
   region        = "us-west-2"
 
@@ -20,7 +20,7 @@ source "amazon-ebs" "amzn2" {
   }
   source_ami_filter {
     filters = {
-      #name                = "amzn2-ami-kernel-5.10-hvm-2.0.20240109.0-x86_64-gp2"
+      name                = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20231025"
       root-device-type    = "ebs"
       virtualization-type = "hvm"
     }

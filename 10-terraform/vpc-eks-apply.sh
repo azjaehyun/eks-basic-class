@@ -50,7 +50,7 @@ echo "********************** terraform tfvars setting  **********************"
 
 echo "********************** 10-pre-requisite Start ***********************"
 cat ./arch/terraform-middle/dev/10-pre-requisite/terraform.tfvars
-echo "테라폼 벨류 설정 파일이 맞으면 y를 눌러주세요"
+echo "키페어를 등록하려면 y를 눌러주세요 "
 read y_value
 
 if [ "$y_value" == "y" ]; then
@@ -64,35 +64,35 @@ fi
 echo "********************** 10-pre-requisite End ***********************"
 
 
-# echo "********************** VPC Make Starting ***********************"
-# cat ./arch/terraform-middle/dev/20-vpc-subnet-eks-bastion/terraform.tfvars
-# echo "테라폼 벨류 설정 파일이 맞으면 y를 눌러주세요"
-# read y_value
+echo "********************** VPC Make Starting ***********************"
+cat ./arch/terraform-middle/dev/20-vpc-subnet-eks-bastion/terraform.tfvars
+echo "테라폼 벨류 설정 파일이 맞으면 y를 눌러주세요"
+read y_value
 
-# if [ "$y_value" == "y" ]; then
-#     echo "VPC 및 bastion 서버 생성을 실행합니다."
-#     terraform -chdir=arch/terraform-middle/dev/20-vpc-subnet-eks-bastion init
-#     terraform -chdir=arch/terraform-middle/dev/20-vpc-subnet-eks-bastion apply --auto-approve
-# else
-#     echo ""
-#     # 추가로 실행할 명령어를 여기에 추가하세요
-# fi
-# echo "********************** VPC Make End ***********************"
+if [ "$y_value" == "y" ]; then
+    echo "VPC 및 bastion 서버 생성을 실행합니다."
+    terraform -chdir=arch/terraform-middle/dev/20-vpc-subnet-eks-bastion init
+    terraform -chdir=arch/terraform-middle/dev/20-vpc-subnet-eks-bastion apply --auto-approve
+else
+    echo ""
+    # 추가로 실행할 명령어를 여기에 추가하세요
+fi
+echo "********************** VPC Make End ***********************"
 
 
 
-# echo "********************** EKS Make Starting ***********************"
-# cat ./arch/terraform-middle/dev/40-eks-getting-started/terraform.tfvars
-# echo "테라폼 벨류 설정 파일이 맞으면 y를 눌러주세요"
-# read y_value
+echo "********************** EKS Make Starting ***********************"
+cat ./arch/terraform-middle/dev/40-eks-getting-started/terraform.tfvars
+echo "테라폼 벨류 설정 파일이 맞으면 y를 눌러주세요"
+read y_value
 
-# if [ "$y_value" == "y" ]; then
-#     echo "EKS를 생성합니다."
-#     terraform -chdir=arch/terraform-middle/dev/40-eks-getting-started init
-#     terraform -chdir=arch/terraform-middle/dev/40-eks-getting-started apply --auto-approve
-# else
-#     exit 0
-#     # 추가로 실행할 명령어를 여기에 추가하세요
-# fi
-# echo "********************** EKS Make End ***********************"
+if [ "$y_value" == "y" ]; then
+    echo "EKS를 생성합니다."
+    terraform -chdir=arch/terraform-middle/dev/40-eks-getting-started init
+    terraform -chdir=arch/terraform-middle/dev/40-eks-getting-started apply --auto-approve
+else
+    exit 0
+    # 추가로 실행할 명령어를 여기에 추가하세요
+fi
+echo "********************** EKS Make End ***********************"
 
