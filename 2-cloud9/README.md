@@ -69,3 +69,22 @@ sudo apt install software-properties-common
 sudo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt-get install -y ansible
 sudo apt-get install -y packer
+
+amazone linux
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+sudo yum -y install packer
+
+git clone https://github.com/azjaehyun/eks-basic-class.git
+
+
+
+## keypare 생성
+```
+ssh-keygen -t rsa -b 2048 -m pem -f ~/.ssh/{your_keyname}
+aws ec2 import-key-pair --key-name {your_keyname} --public-key-material fileb://~/.ssh/{your_keyname}.pub
+
+EX)
+ssh-keygen -t rsa -b 2048 -m pem -f ~/.ssh/aws-test
+aws ec2 import-key-pair --key-name aws-test --public-key-material fileb://~/.ssh/aws-test.pub
+```

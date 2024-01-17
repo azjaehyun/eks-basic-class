@@ -2,10 +2,10 @@
 # ec2 connect
 ## resource : https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair
 ## data source : https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/key_pair
-module "aws_key_pair" {
-  source = "../../../../modules/aws/keypair"
-  keypair_name   = var.keypair_name
-  tag_name = merge(local.tags, {Name = format("%s-key", local.name_prefix)})
+
+resource "aws_key_pair" "this" {
+  key_name    = "${local.name_prefix}-keypair"
+  public_key  = file("${path.module}/template/basic.pub")
 }
 
 # vpc setting
@@ -144,7 +144,7 @@ module "aws_sg_default" {
 module "aws_ec2_bastion" {
   source        = "../../../../modules/aws/ec2/ec2_bastion"
   sg_groups     = [module.aws_sg_default.sg_id]
-  key_name      = module.aws_key_pair.key_name
+  key_name      = "${local.name_prefix}-keypair"
   public_access = true
   subnet_id     = module.aws_public_subnet_a.subnet_id
   tag_name = merge(local.tags, {Name = format("%s-ec2-public-bastion-a", local.name_prefix)})

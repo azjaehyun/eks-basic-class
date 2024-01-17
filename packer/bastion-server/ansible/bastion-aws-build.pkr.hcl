@@ -8,14 +8,14 @@ packer {
 }
 
 source "amazon-ebs" "amzn2" {
-  ami_name      = "bastion3-packer-linux-aws"
+  ami_name      = "bastion-packer-aws-linux" # modify
   instance_type = "t2.micro"
   region        = "us-west-2"
 
 
   subnet_filter {
     filters = {
-        "tag:Name": "*public*"
+        "tag:Name": "*public*" 
     }
   }
   source_ami_filter {
@@ -28,8 +28,6 @@ source "amazon-ebs" "amzn2" {
     owners      = ["099720109477"]
   }
   ssh_username = "ubuntu"
-  ssh_keypair_name = "terraform-jh"
-  ssh_private_key_file = "~/.ssh/terraform-jh.pem"
 }
 
 
