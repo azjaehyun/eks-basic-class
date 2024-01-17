@@ -42,7 +42,7 @@ rm ${kegen_y_value}-keypair.pub
 echo "********************** keypair Make Finish ***********************"
 
 
-echo ""********************** terraform tfvars setting  "**********************"
+echo "********************** terraform tfvars setting  **********************"
 read tfvar_y_value
 find . -type f -name "*.tfvars" -exec sed -i "s/jaehyun.yang/$tfvar_y_value/g"  {} \;
 sed -e  "s/owner                   = \"jaehyun.yang\"/owner                   = \"$tfvar_y_value\"/g" -f ./arch/terraform-middle/dev/10-pre-requisite/terraform.tfvars > back.vars
