@@ -141,8 +141,9 @@ module "aws_sg_default" {
 module "aws_ec2_bastion" {
   source        = "../../../../modules/aws/ec2/ec2_bastion"
   sg_groups     = [module.aws_sg_default.sg_id]
-  key_name      = "${local.name_prefix}-${local.owner}-keypair"
+  key_name      = var.keypair_name
   public_access = true
+  ami_id = var.bastion_ami_id
   subnet_id     = module.aws_public_subnet_a.subnet_id
   tag_name = merge(local.tags, {Name = format("%s-ec2-public-bastion-a", local.name_prefix)})
 }

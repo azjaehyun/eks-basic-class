@@ -28,6 +28,11 @@ variable "keypair_name" {
   type        = string
 }
 
+variable "bastion_ami_id" {
+  description = "bastion_ami_id"
+  type        = string
+  #default = "ami-0871d1355365588e9"
+}
 
 
 locals {
