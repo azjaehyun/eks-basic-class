@@ -64,7 +64,7 @@ fi
 echo "********************** 10-pre-requisite End ***********************"
 
 
-echo "********************** VPC Make Starting ***********************"
+echo "********************** 20 - VPC Make Starting ***********************"
 cat ./arch/terraform-middle/dev/20-vpc-subnet-eks-bastion/terraform.tfvars
 echo "테라폼 벨류 설정 파일이 맞으면 y를 눌러주세요"
 read y_value
@@ -77,11 +77,11 @@ else
     echo ""
     # 추가로 실행할 명령어를 여기에 추가하세요
 fi
-echo "********************** VPC Make End ***********************"
+echo "********************** 20 - VPC Make End ***********************"
 
 
 
-echo "********************** EKS Make Starting ***********************"
+echo "********************** 30 - EKS Make Starting ***********************"
 cat ./arch/terraform-middle/dev/40-eks-getting-started/terraform.tfvars
 echo "테라폼 벨류 설정 파일이 맞으면 y를 눌러주세요"
 read y_value
@@ -94,5 +94,5 @@ else
     exit 0
     # 추가로 실행할 명령어를 여기에 추가하세요
 fi
-echo "********************** EKS Make End ***********************"
+echo "********************** 30 - EKS Make End ***********************"
 
