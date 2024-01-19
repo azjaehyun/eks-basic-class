@@ -37,8 +37,8 @@ echo " 생성된 개인키와 공개키는 테라폼 구성을 위해 ./arch/ter
 cp ${kegen_y_value}-keypair ./arch/terraform-middle/dev/10-pre-requisite/template/
 cp ${kegen_y_value}-keypair.pub ./arch/terraform-middle/dev/10-pre-requisite/template/
 
-rm ${kegen_y_value}-keypair
-rm ${kegen_y_value}-keypair.pub
+#rm ${kegen_y_value}-keypair
+#rm ${kegen_y_value}-keypair.pub
 echo "********************** keypair Make Finish ***********************"
 
 
@@ -52,7 +52,7 @@ echo "********************** 10-pre-requisite Start ***********************"
 cat ./arch/terraform-middle/dev/10-pre-requisite/terraform.tfvars
 echo "키페어를 등록하려면 y를 눌러주세요 "
 read y_value
-
+	
 if [ "$y_value" == "y" ]; then
     echo "10-pre-requisite keypair 등록을 실행합니다."
     terraform -chdir=arch/terraform-middle/dev/10-pre-requisite init

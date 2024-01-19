@@ -18,6 +18,7 @@ variable "public_access" {
 
 variable "ami_id" {
   type    = string
+  description = "us-west-2 리전에는 ami-0871d1355365588e9 입력 - 멘토가 미리 만들어놓음 "
   default = ""
 }
 
@@ -28,6 +29,7 @@ variable "name" {
 
 variable "key_name" {
   type = string
+  description = " 키페어 메뉴에 들어가서 본인의 해당 키 페어 이름 복사해서 넣어주세요. " 
 }
 
 
