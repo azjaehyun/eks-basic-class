@@ -8,7 +8,7 @@ packer {
 }
 
 source "amazon-ebs" "amzn2" {
-  ami_name      = "bastion-packer-ubuntu" # modify
+  ami_name      = "eks-bastion-packer-ubuntu" # modify
   instance_type = "t2.micro"
   region        = "us-west-2"
 
