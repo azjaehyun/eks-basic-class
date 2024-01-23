@@ -31,11 +31,13 @@ variable "keypair_name" {
 variable "eks_min_size" {
   description = "eks_node_group_min_size"
   type = number
+  default = 1
 }
 
 variable "eks_max_size" {
   description = "eks_node_group_max_size"
   type = number
+  default = 1
 }
 
 locals {

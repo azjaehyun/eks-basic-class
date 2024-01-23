@@ -1,8 +1,11 @@
 # eks-basic-class
 eks-basic-class - EKS를 처음 접하는 분
 
+
+
 ## eksctl
 ```
+eksctl create cluster --name my-cluster --region region-code
 https://awskocaptain.gitbook.io/aws-builders-eks/4.-eksctl
 kubectl -n kube-system describe serviceaccounts aws-load-balancer-controller     
 ```

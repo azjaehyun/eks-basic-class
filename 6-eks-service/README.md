@@ -8,5 +8,8 @@ https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/aws-load-balancer-control
 
 ```
 
-# 마리오 
+# 마리오 - CLB
 https://devocean.sk.com/blog/techBoardDetail.do?ID=163578#none
+
+
+# 테트리스 - ALB

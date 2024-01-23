@@ -31,7 +31,7 @@ variable "keypair_name" {
 variable "bastion_ami_id" {
   description = "bastion_ami_id"
   type        = string
-  #default = "ami-0871d1355365588e9"
+  #default = "ami-0433deae4ce0482d4"
 }
 
 
