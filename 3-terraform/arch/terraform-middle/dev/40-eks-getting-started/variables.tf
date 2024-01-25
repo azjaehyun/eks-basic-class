@@ -28,7 +28,7 @@ variable "keypair_name" {
   type        = string
   validation {
     condition     = can(regex("keypair$", var.keypair_name))
-    error_message = "The variable must end with 'keypair'"
+    error_message = "The variable must end with keypair."
   }
 }
 

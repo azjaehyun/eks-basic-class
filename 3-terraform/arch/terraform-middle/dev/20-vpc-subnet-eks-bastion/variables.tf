@@ -34,7 +34,7 @@ variable "bastion_ami_id" {
   default = "ami-09370ebbf30fffa1c"
   validation {
     condition     = can(regex("^ami-", var.bastion_ami_id))
-    error_message = "AMI ID must start with ami "
+    error_message = "AMI ID must start with ami."
   }
 }
 
