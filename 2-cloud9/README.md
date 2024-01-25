@@ -40,7 +40,7 @@ Default output format [None]: json
 - 확인 명령어 : aws configure list
 
 --- 
-### 5. packer 로 bastion AMI 를 생성하자.
+### 5. packer 로 bastion AMI 를 생성하자. [이걸 왜하냐? bastio서버 셋팅하기 귀찮다!! 그래서 미리 설정한 이미지를 올리기 위해서 !!]
 - packer install 및 버전 확인
 ```
 cd ~
@@ -49,7 +49,67 @@ sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinu
 sudo yum -y install packer
 packer --version 
 ```
-- 
+- 이제 bastion ami를 만들어보자 !! 아래 경로로 이동
+```
+cd /home/ec2-user/environment
+cd ./eks-basic-class/packer/bastion-server
+```
+- packer 변수명 수정해야 해서 아래 절차 진행
+- vi bastion-aws-build.pkr.hcl 입력후 11번 라인 ami_name 이름인 eks-bastion-packer-ubuntu 이름 수정
+- 본인 이름앞에 프리픽스로 넣어서 수정하기 EX) yangjaehyun-eks-bastion-packer-ubuntu
+- 수정 완료후 아래 명령어 실행
+```
+packer init bastion-aws-build.pkr.hcl
+packer build bastion-aws-build.pkr.hcl
+```
+- 실행 하면 아래와 같이 packer를 이용한 빌드 진행과정 출력 확인
+```
+jaehyun.yang@bespinglobal.com:~/environment/eks-basic-class/packer/bastion-server (main) $ packer build bastion-aws-build.pkr.hcl 
+learn-packer.amazon-ebs.amzn2: output will be in this color.
+
+==> learn-packer.amazon-ebs.amzn2: Prevalidating any provided VPC information
+==> learn-packer.amazon-ebs.amzn2: Prevalidating AMI Name: yangjaehyun-eks-bastion-packer-ubuntu
+    learn-packer.amazon-ebs.amzn2: Found Image ID: ami-08e2c1a8d17c2fe17
+    learn-packer.amazon-ebs.amzn2: Found Subnet ID: subnet-0029d9863c957a70e
+==> learn-packer.amazon-ebs.amzn2: Creating temporary keypair: packer_65b1be50-eae2-4347-e797-f87d32558127
+==> learn-packer.amazon-ebs.amzn2: Creating temporary security group for this instance: packer_65b1be51-c64c-e889-be
+
+... 중간 생략
+
+
+==> learn-packer.amazon-ebs.amzn2: Terminating the source AWS instance...
+==> learn-packer.amazon-ebs.amzn2: Cleaning up any extra volumes...
+==> learn-packer.amazon-ebs.amzn2: No volumes to clean up, skipping
+==> learn-packer.amazon-ebs.amzn2: Deleting temporary security group...
+==> learn-packer.amazon-ebs.amzn2: Deleting temporary keypair...
+Build 'learn-packer.amazon-ebs.amzn2' finished after 6 minutes 34 seconds.
+
+==> Wait completed after 6 minutes 34 seconds
+
+==> Builds finished. The artifacts of successful builds are:
+--> learn-packer.amazon-ebs.amzn2: AMIs were created:
+us-west-2: ami-09370ebbf30fffa1c   << AMI 가 정상적으로 생성되면 ami id가 출력됨..
+```
+## packer ami 이미지 확인
+- aws ec2 describe-images --image-ids { 위에 생성된 ami id 입력 }
+- ex) aws ec2 describe-images --image-ids ami-09370ebbf30fffa1c 
+- 결과 확인
+```
+{
+    "Images": [
+        {
+            "Architecture": "x86_64",
+            "CreationDate": "2024-01-25T01:53:26.000Z",
+            "ImageId": "ami-09370ebbf30fffa1c",
+            "ImageLocation": "767404772322/yangjaehyun-eks-bastion-packer-ubuntu",
+            "ImageType": "machine",
+            "Public": false,
+            "OwnerId": "767404772322",
+            "PlatformDetails": "Linux/UNIX",
+            "UsageOperation": "RunInstances", 
+
+... 이하 생략
+```
 
   
 
