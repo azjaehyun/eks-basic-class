@@ -24,21 +24,28 @@ echo "********************** Terraform install finish ***********************"
 
 
 echo "********************** keypair Make Start ***********************"
-echo "ssh-keygen key를 생성합니다. key file 이름을 입력해주세요. 본인 영문명을 넣어주시면 됩니다. EX) yangjaehyun "
-read kegen_y_value
-ssh-keygen -t rsa -b 2048 -m pem -f ${kegen_y_value}-keypair
 
-echo  " 만들어진 공개키는 아래와 같습니다 "
-cat ${kegen_y_value}-keypair.pub
-echo  " 만들어진 개인키는 아래와 같습니다 "
-cat ${kegen_y_value}-keypair
+echo "테라폼 cli 설치가 필요하시면 y를 입력해주세요"
+read keypair_y_value
+if [ "$keypair_y_value" == "y" ]; then
+    echo "ssh-keygen key를 생성합니다. key file 이름을 입력해주세요. 본인 영문명을 넣어주시면 됩니다. EX) yangjaehyun "
+    read kegen_y_value
+    ssh-keygen -t rsa -b 2048 -m pem -f ${kegen_y_value}-keypair
 
-echo " 생성된 개인키와 공개키는 테라폼 구성을 위해 ./arch/terraform-middle/dev/10-pre-requisite/template/ 경로로 복사합니다"
-cp ${kegen_y_value}-keypair ./arch/terraform-middle/dev/10-pre-requisite/template/
-cp ${kegen_y_value}-keypair.pub ./arch/terraform-middle/dev/10-pre-requisite/template/
+    echo  " 만들어진 공개키는 아래와 같습니다 "
+    cat ${kegen_y_value}-keypair.pub
+    echo  " 만들어진 개인키는 아래와 같습니다 "
+    cat ${kegen_y_value}-keypair
 
+    echo " 생성된 개인키와 공개키는 테라폼 구성을 위해 ./arch/terraform-middle/dev/10-pre-requisite/template/ 경로로 복사합니다"
+    cp ${kegen_y_value}-keypair ./arch/terraform-middle/dev/10-pre-requisite/template/
+    cp ${kegen_y_value}-keypair.pub ./arch/terraform-middle/dev/10-pre-requisite/template/
+else
+    echo "keypair 생성 pass"
+fi
 #rm ${kegen_y_value}-keypair
 #rm ${kegen_y_value}-keypair.pub
+
 echo "********************** keypair Make Finish ***********************"
 
 

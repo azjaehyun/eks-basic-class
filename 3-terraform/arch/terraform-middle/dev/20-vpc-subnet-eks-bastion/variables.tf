@@ -24,14 +24,14 @@ variable "vpc_cidr" {
 }
 
 variable "keypair_name" {
-  description = "ec2 key pair name"
+  description = "ec2 key pair name (키 페어 메뉴에서 생성된 본인의 키페어 이름을 넣어주세요.)"
   type        = string
 }
 
 variable "bastion_ami_id" {
-  description = "bastion_ami_id"
+  description = "bastion_ami_id (AMI 메뉴에서 앞서 packer로 생성한 본인이 AMI id 값을 넣어주세요.)"
   type        = string
-  #default = "ami-0433deae4ce0482d4"
+  #default = "	ami-09370ebbf30fffa1c"
 }
 
 
