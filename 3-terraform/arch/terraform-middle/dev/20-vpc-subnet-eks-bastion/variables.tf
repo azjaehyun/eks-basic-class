@@ -26,6 +26,10 @@ variable "vpc_cidr" {
 variable "keypair_name" {
   description = "ec2 key pair name (키 페어 메뉴에서 생성된 본인의 키페어 이름을 넣어주세요.)"
   type        = string
+  validation {
+    condition     = can(regex("keypair$", var.keypair_name))
+    error_message = "The variable must end with keypair."
+  }
 }
 
 variable "bastion_ami_id" {
