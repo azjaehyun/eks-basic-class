@@ -49,6 +49,8 @@ sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinu
 sudo yum -y install packer
 packer --version 
 ```
+  
+
 - 이제 bastion ami를 만들어보자 !! 아래 경로로 이동
 ```
 cd /home/ec2-user/environment
@@ -58,15 +60,18 @@ cd ./eks-basic-class/packer/bastion-server
 - vi bastion-aws-build.pkr.hcl 입력후 11번 라인 ami_name 이름인 eks-bastion-packer-ubuntu 이름 수정
 - 본인 이름앞에 프리픽스로 넣어서 수정하기 EX) yangjaehyun-eks-bastion-packer-ubuntu
 - 수정 완료후 아래 명령어 실행
+  
+
 ```
 packer init bastion-aws-build.pkr.hcl
 packer build bastion-aws-build.pkr.hcl
 ```
-- 실행 하면 아래와 같이 packer를 이용한 빌드 진행과정 출력 확인
-```
-jaehyun.yang@bespinglobal.com:~/environment/eks-basic-class/packer/bastion-server (main) $ packer build bastion-aws-build.pkr.hcl 
-learn-packer.amazon-ebs.amzn2: output will be in this color.
+- 실행 하면 아래와 같이 packer를 이용한 빌드 진행과정 출력 확인  
 
+```
+packer build bastion-aws-build.pkr.hcl 
+
+learn-packer.amazon-ebs.amzn2: output will be in this color.
 ==> learn-packer.amazon-ebs.amzn2: Prevalidating any provided VPC information
 ==> learn-packer.amazon-ebs.amzn2: Prevalidating AMI Name: yangjaehyun-eks-bastion-packer-ubuntu
     learn-packer.amazon-ebs.amzn2: Found Image ID: ami-08e2c1a8d17c2fe17
@@ -75,7 +80,6 @@ learn-packer.amazon-ebs.amzn2: output will be in this color.
 ==> learn-packer.amazon-ebs.amzn2: Creating temporary security group for this instance: packer_65b1be51-c64c-e889-be
 
 ... 중간 생략
-
 
 ==> learn-packer.amazon-ebs.amzn2: Terminating the source AWS instance...
 ==> learn-packer.amazon-ebs.amzn2: Cleaning up any extra volumes...
@@ -90,6 +94,8 @@ Build 'learn-packer.amazon-ebs.amzn2' finished after 6 minutes 34 seconds.
 --> learn-packer.amazon-ebs.amzn2: AMIs were created:
 us-west-2: ami-09370ebbf30fffa1c   << AMI 가 정상적으로 생성되면 ami id가 출력됨..
 ```
+  
+
 ## packer ami 이미지 확인
 - aws ec2 describe-images --image-ids { 위에 생성된 ami id 입력 }
 - ex) aws ec2 describe-images --image-ids ami-09370ebbf30fffa1c 

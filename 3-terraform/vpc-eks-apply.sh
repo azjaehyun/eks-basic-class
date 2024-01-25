@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 echo "********************** Make AWS credentials Setting ***********************"
 aws configure
 
@@ -24,7 +24,7 @@ echo "********************** Terraform install finish ***********************"
 
 
 echo "********************** keypair Make Start ***********************"
-echo "ssh-keygen key를 생성합니다. key file 이름을 입력해주세요. EX) jaehyun.ynag "
+echo "ssh-keygen key를 생성합니다. key file 이름을 입력해주세요. 본인 영문명을 넣어주시면 됩니다. EX) yangjaehyun "
 read kegen_y_value
 ssh-keygen -t rsa -b 2048 -m pem -f ${kegen_y_value}-keypair
 
