@@ -1,97 +1,56 @@
 # cloud9 IDE 환경 구성
 
-git clone
-```
-https://github.com/azjaehyun/eks-basic-class.git
-```
 
-1. Cloud9 구성 설정 
+
+### 1. Cloud9 구성 설정 및 생성!
 - 리전 오레곤 선택 ( us-west-2 선택!! 이유는 가격이 젤쌈 ^^)
 - service에서 cloud9 검색 -> 오른쪽 주황색 환경 생성 버튼 클릭
 - 세부 정보 이름 , 설명 본인이 작성 
-- Instance Type - 추가 인스턴스 유형 - t3.large
+- Instance Type - 추가 인스턴스 유형 - t2.micro
 - 플랫폼 - Amazone Linux 2023
 - 시간제한 setting - Never(안함)
 - 네트워크 설정 - Aws systems Manager(SSM)
 - VPC - default 선택
-- subnet - us-west-2a로 선택
+- subnet - us-west-2a로 선택  
 
-2. AWS CLI command
+---
+
+### 2. cloud9 생성후 접속 후 환경 셋팅하자 !!!
+- 오른쪽 상단위 톱니바퀴 클릭 -> AWS settings 클릭 -> Credentials [Aws managed temporary credentails] 비활성화 ( 녹색 -> 빨간색으로 버튼 클릭~)  
+
+
+---
+### 3. 왼쪽 깃 sourcec control 클릭 후
+-  Clone Repository 클릭 후 https://github.com/azjaehyun/eks-basic-class.git 입력후 엔터!
+-  /home/ec2-user/environment 기본 경로로 설정후 녹색버튼 클릭
+- 화면 아래 bash 탭에 접속후 ls 치면 eks-basic-class 폴더로 깃이 다운로드 되어 있는것을 확인
+- 왼쪽 탭에 폴더 모양을 누르면 Hierarchy 구조로  eks-basic-class 폴더를 볼 수 있음.  
+
+
+---
+### 4. aws configure 설정
+- aws configure 명령어 친 후에 본인 억세스키와 시크릿키 리전 입력
+- [EX] aws configure
 ```
-# AWS CLI Upgrade
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
-source ~/.bashrc
-aws --version
-# AWS CLI 자동완성 설치 
-which aws_completer
-export PATH=/usr/local/bin:$PATH
-source ~/.bash_profile
-complete -C '/usr/local/bin/aws_completer' aws
+AWS Access Key ID [None]: abcdedfeg.... [<<본인 억세스키 입력]
+AWS Secret Access Key [None]: abdkljalkfjlke [<<본인 스키릿키 입력]
+Default region name [None]: us-west-2
+Default output format [None]: json
 ```
+- 확인 명령어 : aws configure list
 
-
-
-3. kubectl install
+--- 
+### 5. packer 로 bastion AMI 를 생성하자.
+- packer install 및 버전 확인
 ```
 cd ~
-curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.22.6/bin/linux/amd64/kubectl
-chmod +x ./kubectl
-sudo mv ./kubectl /usr/local/bin/kubectl
-source <(kubectl completion bash)
-echo "source <(kubectl completion bash)" >> ~/.bashrc
-kubectl version --short --client
-
-```
-
-4. etc util
-```
-sudo yum -y install jq gettext bash-completion moreutils
-for command in kubectl jq envsubst aws
-  do
-    which $command &>/dev/null && echo "$command in path" || echo "$command NOT FOUND"
-  done
-```
-
-5. k9s install
-```
-K9S_VERSION=v0.26.7
-curl -sL https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_x86_64.tar.gz | sudo tar xfz - -C /usr/local/bin 
-
-```
-
-5. k9s checking
-```
-k9s
-k9s 단춬키는 ? 입력후 엔터
-```
-
-
-6. ETC. (packer and ansible install)
-ansible & packer install
-sudo apt install software-properties-common
-sudo add-apt-repository --yes --update ppa:ansible/ansible
-sudo apt-get install -y ansible
-sudo apt-get install -y packer
-
-amazone linux
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
 sudo yum -y install packer
-
-git clone https://github.com/azjaehyun/eks-basic-class.git
-
-
-
-## keypare 생성
+packer --version 
 ```
-ssh-keygen -t rsa -b 2048 -m pem -f ~/.ssh/{your_keyname}
-aws ec2 import-key-pair --key-name {your_keyname} --public-key-material fileb://~/.ssh/{your_keyname}.pub
+- 
 
-EX)
-ssh-keygen -t rsa -b 2048 -m pem -f ~/.ssh/aws-test
-aws ec2 import-key-pair --key-name aws-test --public-key-material fileb://~/.ssh/aws-test.pub
+  
 
 
-```
