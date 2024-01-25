@@ -46,7 +46,7 @@ The key's randomart image is:
 |   .o.=..+*BO=+. |
 +----[SHA256]-----+
  만들어진 공개키는 아래와 같습니다 
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2NEASRiSsTxjXAmLbnsmNE2T9eFRGZbywiJxUi3H4WuVJ9UWYH991tAAfHB8K26H32TB6HaNSiXwsC7bpMeKoVNsaduE6uQLezNR56E7GLtO8dus/PTcyb1dEnsAfchM1+cTAqnEs4Pr1NN5uS8od6SsgwXGYcEWE71vTIdBxS5uFBfRHG+SBPX+u+ov5TS8Zd/vevg9NRZde4L67XzA8j9Q8Kfr1Sgs7q2YMuCNqM49oiCZ6iF8H4d3+QhaZmTTnFbBafFBlynXLW9VG/iWjfJAqYufpvu1+HZo2Tffc+Nc938MZ7WUpYeiwffi6ml/hUUdsOqAayXbEsVZztMjt ec2-user@ip-172-31-43-99.us-west-2.compute.internal
+ssh-rsa adfafafa/PTcyb1dEnsAfchM1+cTAqnEs4Pr1NN5uS8od6SsgwXGYcEWE71vTIdBxS5uFBfRHG+SBPX+u+ov5TS8Zd/vevg9NRZde4L67XzA8j9Q8Kfr1Sgs7q2YMuCNqM49oiCZ6iF8H4d3+QhaZmTTnFbBafFBlynXLW9VG/iWjfJAqYufpvu1+HZo2Tffc+Nc938MZ7WUpYeiwffi6ml/adfa ec2-user@ip-172-31-43-99.us-west-2.compute.internal
  만들어진 개인키는 아래와 같습니다 
 -----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEAtjRAEkYkrE8Y1wJi257JjRNk/XhURmW8sIicVItx+FrlSfVF
@@ -54,18 +54,7 @@ mB/fdbQAHxwfCtuh99kweh2jUol8LAu26THiqFTbGnbhOrkC3szUeehOxi7TvHbr
 Pz03Mm9XRJ7AH3ITNfnEwKpxLOD69TTebkvKHekrIMFxmHBFhO9b0yHQcUubhQX0
 RxvkgT1/rvqL+U0vGXf73r4PTUWXXuC+u18wPI/UPCn69UoLO6tmDLgjajOPaIgm
 eohfB+Hd/kIWmZk05xWwWnxQZcp1y1vVRv4lo3yQKmLn6b7tfh2aNk333PjXPd/D
-Ge1lKWHosH34uppf4VFHbDqgGsl2xLFWc7TI7QIDAQABAoIBAA/HNg4vD1Fxlw3V
-edCZb0w9c/ckMq4W9NBXwCvtGG1Al88AA6sRBYWYlRMcmQ6UZvIC15kXlHNbDwr0
-Z75JcN6RXJjt1wLCDz7Sf4rgBGRSnUjahnQnPa6rKCQ72BjRBNtdef2SNPNFN05B
-Kgrkmsfcz3yKa+cev9JrdOjzamzJESqvtPtEf9VR8cEbm2rAdzJiUKR7rdsYr6b5
-MdVFYS5H5kUVSui0wH3wA3LDJ3x99lsMf7o2WkNx0HPRy1Of9BBqh52cl05VL+kd
-ufsSNZogBU2xC02UCAnN/5vu+xIkvCKH14SxY+Euzm1rMtBtvNjADaSomEAf/0B/
-6+fubokCgYEA4PCKyk+qVCo24lfywH4eP9XxX4PBBZdGVRx/XdM2zxc2NB4YH7Ct
-wKZQjxTuvNEZ4iypHleYJSYdDp7LnCGQPN/JCOYmzn0CxFhWdeAplxEmSLAqYnUm
-GT16VEFhkC/IjuRvcRZjA9EroO44cnqIkQgIr5lKn92Bx90F/6GfYmUCgYEAz10J
-oWQ76hc6+1fNtKmvEQ56ZYNVnXNB+U0LSX9ON1LK/cBgl9e5NT//q4cRcERjt6F7
-3yKKQp6WhcAYi50XC5yAbPFaaqu3F/pLTBT7+T+jEVlvHRqAPWsSVVpbOWa3RHgo
-j/fiXERBK0BsDw667bbtTIpKl+2bnMtPnbEyH+kCgYA/QaXmKu0dahmxIUZ094KO
+Ge1lKWHosH34uppf4VFHbDqgGsl2xadfafafnMtPnbEyH+kCgYA/QaXmKu0dahmx
 NR4B3E1lwxrWSINQ4VridgaaNXRXRRo3uQ2ijyJsGumKf0C39a4llEhLmkBsEcw8
 MjqYtBBptSIYETePQpCvmPUJL/FbatJh+rXyB8jmAWoHNRpZ1Q/XPPVl9lgNaYQK
 NRYsO5GOz331tKRBNTRbOQKBgH8tLnTfRqfBa5kvNqgw0YACgyqzK9UPFU1S5TNE
@@ -79,7 +68,120 @@ YtUAmtx2MwfFNqb/1h8cQZPEOJXF1o7xCxUX9PQT4IWZIkikcv8b//CNE
 ********************** keypair Make Finish ***********************
 ********************** terraform tfvars owner 변수를 변경합니다 ****************************
 ********************** 본인의 이름을 영어로 입력하세요 ex) yang.jaehyun **************************
+yangjaehyun
+********************** terraform tfvars setting  **********************
+********************** 10-pre-requisite Start ***********************
+context = {
+    aws_credentials_file    = "$HOME/.aws/credentials"
+    aws_profile             = "default"
+    aws_region              = "us-west-2"
+    region_alias            = "uw2"
 
+    project                 = "eks-init"
+    environment             = "dev"
+    env_alias               = "d"
+    owner                   = "yangjaehyun"
+    team_name               = "Devops CNE Team"
+    team                    = "CNE"
+    generator_date          = "20240108"
+    domain                  = "terraform.prac.dev"
+    pri_domain              = "terraform.prac"
+}
+키페어를 등록하려면 y를 눌러주세요 
+y
+10-pre-requisite keypair 등록을 실행합니다.
 
+Initializing the backend...
+
+Initializing provider plugins...
+- Finding hashicorp/aws versions matching ">= 3.31.0"...
+- Finding latest version of hashicorp/tls...
+- Installing hashicorp/aws v5.33.0...
+- Installed hashicorp/aws v5.33.0 (self-signed, key ID 34365D9472D7468F)
+- Installing hashicorp/tls v4.0.5...
+- Installed hashicorp/tls v4.0.5 (self-signed, key ID 34365D9472D7468F)
+
+Partner and community providers are signed by their developers.
+If you'd like to know more about provider signing, you can read about it here:
+https://www.terraform.io/docs/cli/plugins/signing.html
+
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+tls_private_key.this: Creating...
+tls_private_key.this: Creation complete after 0s [id=34e3e360f834bed4466b6e32b5298d054e6b648f]
+aws_key_pair.this: Creating...
+aws_key_pair.this: Creation complete after 0s [id=eks-init-uw2d-yangjaehyun-keypair]
+
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+********************** 10-pre-requisite End ***********************
+********************** 20 - VPC Make Starting ***********************
+context = {
+    aws_credentials_file    = "$HOME/.aws/credentials"
+    aws_profile             = "default"
+    aws_region              = "us-west-2"
+    region_alias            = "uw2"
+
+    project                 = "eks-init"
+    environment             = "dev"
+    env_alias               = "d"
+    owner                   = "yangjaehyun"
+    team_name               = "Devops CNE Team"
+    team                    = "CNE"
+    generator_date          = "20240108"
+    domain                  = "terraform.prac.dev"
+    pri_domain              = "terraform.prac"
+}
+
+# vpc prefix ip
+vpc_cidr = "40.40"테라폼 벨류 설정 파일이 맞으면 y를 눌러주세요
+ㅛy
+VPC 및 bastion 서버 생성을 실행합니다.
+Initializing modules...
+- aws_ec2_bastion in ../../../../modules/aws/ec2/ec2_bastion
+- aws_private_subnet_eks_a in ../../../../modules/aws/subnet
+- aws_private_subnet_eks_c in ../../../../modules/aws/subnet
+- aws_public_subnet_a in ../../../../modules/aws/subnet
+- aws_public_subnet_c in ../../../../modules/aws/subnet
+- aws_sg_default in ../../../../modules/aws/security
+- aws_vpc in ../../../../modules/aws/vpc
+- aws_vpc_network in ../../../../modules/aws/network/igw_nat_subnet
+
+Initializing the backend...
+
+Initializing provider plugins...
+- Finding latest version of hashicorp/aws...
+- Installing hashicorp/aws v5.33.0...
+- Installed hashicorp/aws v5.33.0 (self-signed, key ID 34365D9472D7468F)
+
+Partner and community providers are signed by their developers.
+If you'd like to know more about provider signing, you can read about it here:
+https://www.terraform.io/docs/cli/plugins/signing.html
+
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
 
 ```
