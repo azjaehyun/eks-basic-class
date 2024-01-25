@@ -98,8 +98,10 @@ us-west-2: ami-09370ebbf30fffa1c   << AMI 가 정상적으로 생성되면 ami i
 
 ## packer ami 이미지 확인
 - aws ec2 describe-images --image-ids { 위에 생성된 ami id 입력 }
-- ex) aws ec2 describe-images --image-ids ami-09370ebbf30fffa1c 
-- 결과 확인
+- ex) aws ec2 describe-images --image-ids ami-09370ebbf30fffa1c  
+
+- 결과 확인  
+
 ```
 {
     "Images": [
