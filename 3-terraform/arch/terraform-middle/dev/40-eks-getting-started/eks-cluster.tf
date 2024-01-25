@@ -70,6 +70,8 @@ resource "aws_eks_cluster" "master_node" {
     security_group_ids = [aws_security_group.terra-middle-cluster.id]
     #subnet_ids         = aws_subnet.demo[*].id
     subnet_ids = tolist(data.aws_subnets.private.ids)
+    endpoint_private_access = true
+    endpoint_public_access  = true
   }
 
   depends_on = [
