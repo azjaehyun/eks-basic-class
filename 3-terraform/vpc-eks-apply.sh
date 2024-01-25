@@ -25,7 +25,7 @@ echo "********************** Terraform install finish ***********************"
 
 echo "********************** keypair Make Start ***********************"
 
-echo "keypair를 생성한 후에 aws에 등록하시려면 y를 입력해주세요. pass하고 싶으시면 엔터키 입력 "
+echo "ssh-keygen을 생성하고 싶으시면 y를 입력 해당 keygen은 aws keypair 등록시 사용됩니다. pass하고 싶으시면 엔터키 입력 "
 read keypair_y_value
 if [ "$keypair_y_value" == "y" ]; then
     echo "ssh-keygen key를 생성합니다. key file 이름을 입력해주세요. 본인 영문명을 넣어주시면 됩니다. EX) yangjaehyun "
@@ -57,7 +57,7 @@ echo "********************** terraform tfvars setting  **********************"
 
 echo "********************** 10-pre-requisite Start ***********************"
 cat ./arch/terraform-middle/dev/10-pre-requisite/terraform.tfvars
-echo "키페어를 등록하려면 y를 눌러주세요 "
+echo "생성된 ssh-kegen을 aws 키페어를 등록하시려면 y를 입력해주세요. pass하고 싶으시면 엔터키 입력 "
 read y_value
 	
 if [ "$y_value" == "y" ]; then

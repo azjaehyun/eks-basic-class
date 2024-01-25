@@ -27,7 +27,7 @@ variable "keypair_name" {
   description = "ec2 key pair name"
   type        = string
   validation {
-    condition     = can(regex("keypair$", var.example))
+    condition     = can(regex("keypair$", var.keypair_name))
     error_message = "The variable must end with 'keypair'"
   }
 }
