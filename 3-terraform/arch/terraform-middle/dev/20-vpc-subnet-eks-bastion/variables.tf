@@ -33,8 +33,8 @@ variable "bastion_ami_id" {
   type        = string
   #default = "ami-09370ebbf30fffa1c"
   validation {
-    error_message = "ami string length 32!! EX => ami-09370ebbf30fffa1c"
-    condition     = length(var.bastion_ami_id) == 19
+    condition     = can(regex("^ami-", var.ami_id))
+    error_message = "AMI ID must start with 'ami-'"
   }
 }
 

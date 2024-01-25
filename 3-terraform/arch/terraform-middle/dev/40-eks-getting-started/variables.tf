@@ -26,6 +26,10 @@ variable "vpc_cidr" {
 variable "keypair_name" {
   description = "ec2 key pair name"
   type        = string
+  validation {
+    condition     = can(regex("keypair$", var.example))
+    error_message = "The variable must end with 'keypair'"
+  }
 }
 
 variable "eks_min_size" {
