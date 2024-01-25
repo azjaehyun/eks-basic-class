@@ -4,7 +4,7 @@ context = {
     aws_region              = "us-west-2"
     region_alias            = "uw2"
 
-    project                 = "eks-init"
+    project                 = "eks-basic"
     environment             = "dev"
     env_alias               = "d"
     owner                   = "jaehyun.yang"

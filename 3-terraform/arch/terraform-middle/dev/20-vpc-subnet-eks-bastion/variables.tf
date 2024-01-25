@@ -35,7 +35,7 @@ variable "keypair_name" {
 variable "bastion_ami_id" {
   description = "bastion_ami_id (AMI 메뉴에서 앞서 packer로 생성한 본인이 AMI id 값을 넣어주세요.)"
   type        = string
-  default = "ami-09370ebbf30fffa1c"
+  #default = "ami-09370ebbf30fffa1c"
   validation {
     condition     = can(regex("^ami-", var.bastion_ami_id))
     error_message = "AMI ID must start with ami."
