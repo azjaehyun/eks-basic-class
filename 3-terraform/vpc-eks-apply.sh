@@ -8,7 +8,7 @@ echo "********************************************************************"
 
 
 echo "********************** Terraform install ***********************"
-echo "테라폼 cli 설치가 필요하시면 y를 입력해주세요"
+echo "테라폼 cli 설치가 필요하시면 y를 입력해주세요.  pass하고 싶으시면 엔터키 입력 "
 read terra_y_value
 if [ "$terra_y_value" == "y" ]; then
     echo "terraform cli 설치를 시작합니다."
@@ -17,7 +17,7 @@ if [ "$terra_y_value" == "y" ]; then
     sudo mv terraform /usr/local/bin/
     terraform --version
 else
-    echo "설치는 pass"
+    echo "테라폼 cli 설치는 pass"
 fi
 
 echo "********************** Terraform install finish ***********************"
@@ -25,7 +25,7 @@ echo "********************** Terraform install finish ***********************"
 
 echo "********************** keypair Make Start ***********************"
 
-echo "테라폼 cli 설치가 필요하시면 y를 입력해주세요"
+echo "keypair를 생성한 후에 aws에 등록하시려면 y를 입력해주세요. pass하고 싶으시면 엔터키 입력 "
 read keypair_y_value
 if [ "$keypair_y_value" == "y" ]; then
     echo "ssh-keygen key를 생성합니다. key file 이름을 입력해주세요. 본인 영문명을 넣어주시면 됩니다. EX) yangjaehyun "
@@ -50,7 +50,7 @@ echo "********************** keypair Make Finish ***********************"
 
 
 echo "********************** terraform tfvars owner 변수를 변경합니다 ****************************"
-echo "********************** 본인의 이름을 영어로 입력하세요 ex) yang.jaehyun ****************************"
+echo "********************** 설정을 위해 본인의 이름을 영어로 입력하세요 ex) yang.jaehyun ****************************"
 read tfvar_y_value
 find . -type f -name "*.tfvars" -exec sed -i "s/jaehyun.yang/$tfvar_y_value/g"  {} \;
 echo "********************** terraform tfvars setting  **********************"
@@ -65,7 +65,7 @@ if [ "$y_value" == "y" ]; then
     terraform -chdir=arch/terraform-middle/dev/10-pre-requisite init
     terraform -chdir=arch/terraform-middle/dev/10-pre-requisite apply --auto-approve
 else
-    echo ""
+    echo " terraform tfvars 변수 설정 pass "
     # 추가로 실행할 명령어를 여기에 추가하세요
 fi
 echo "********************** 10-pre-requisite End ***********************"
