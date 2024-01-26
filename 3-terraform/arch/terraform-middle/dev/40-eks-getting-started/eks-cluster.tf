@@ -75,9 +75,9 @@ resource "aws_eks_cluster" "master_node" {
   }
   
   kubernetes_network_config {
-    service_ipv4_cidr = "40.40.0.0/16"
+    service_ipv4_cidr = "10.100.0.0/16"
   }
-
+  
   depends_on = [
     aws_iam_role_policy_attachment.terra-middle-cluster-AmazonEKSClusterPolicy,
     aws_iam_role_policy_attachment.terra-middle-cluster-AmazonEKSVPCResourceController,
