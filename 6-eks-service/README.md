@@ -1,135 +1,83 @@
 ### eks-basic-class
-eks-basic-class - EKS를 처음 접하는 분
+해당 챕터에서는 eks service에 필요한 lib를 설치하고 실습합니다.
+---
 
-### aws-load-balancer-controller 설치
+- eks service를 진행하면서 필요한 lib를 설치하고 셋팅합니다.
+  * 설치 목록
+  * aws-load-balancer-controller policy 생성
+  * aws-load-balancer-controller policy serviceaccount 생성
+  * oidc-provider 설치
+  * cert manager 설치
+- 실습 - k8s Service 종류 실습
+  * clb 
+  * alb
+  * ingress 
+  * NodePort
+  * CluserIP
+
+### aws-load-balancer-controller 설치 document 참고하세요.
 ```
-https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
-https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/aws-load-balancer-controller.html
+- https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
+- https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/aws-load-balancer-controller.html
 ```
-### [ingress controller yaml down](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/install/v2_2_4_full.yaml)
-wget https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/install/v2_2_4_full.yaml
+---
 
 
-### [cert manager install](https://cert-manager.io/docs/installation/)
+### aws-load-balancer-controller policy 생성
+
+-  policy 다운로드
+```
+curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
+```
+  
+- 다운로드후 165~166 라인 삭제 후 아래 명령어 실행.
+```
+aws iam create-policy \
+    --policy-name AWSLoadBalancerControllerIAMPolicy \
+    --policy-document file://iam_policy.json
+```
+  
+
+### aws-load-balancer-controller serviceaccount 생성
+```
+eksctl create iamserviceaccount \
+  --cluster=eks-init-uw2d-eks \
+  --namespace=kube-system \
+  --name=aws-load-balancer-controller \
+  --role-name AmazonEKSLoadBalancerControllerRole \
+  --attach-policy-arn=arn:aws:iam::767404772322:policy/AWSLoadBalancerControllerIAMPolicy \
+  --approve \
+  --override-existing-serviceaccounts
+```
+
+
+### aws-load-balancer-controller serviceacount checking 명령어
+```
+kubectl get serviceaccounts -n kube-system aws-load-balancer-controller -o yaml
+```
+
+### aws-load-balancer-controller serviceacount delete 명령어
+```
+eksctl delete iamserviceaccount \
+  --cluster=eks-init-uw2d-eks \
+  --namespace=kube-system \
+  --name=aws-load-balancer-controller
+```
+
+### eks에 aws-load-balancer-controller를 설치하자!!   
+- [ingress controller yaml down](https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.5.4/v2_5_4_full.yaml)
+- wget https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.5.4/v2_5_4_full.yaml 
+- 해당 파일은 aws-load-balancer-yaml 폴더 안에 있습니다.
+- download 후 863 line에 본인의 클러스터 이름으로 수정!! EX) - --cluster-name=yangjaehyun-cluster
+- 596 ~ 603 line 인 serviceaccount는 삭제!! 왜냐면 위에서 serviceacount 를 생성했기 때문
+
+
+### oidc-provider 설치
+```
+eksctl utils associate-iam-oidc-provider --region=us-west-2 --cluster=eks-init-uw2d-eks --approve
+```
+
+###  [cert manager 설치](https://cert-manager.io/docs/installation/)
 ```
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.3/cert-manager.yaml
-```
-
-### 마리오 - CLB
-https://devocean.sk.com/blog/techBoardDetail.do?ID=163578#none
-
-
-### 테트리스 - ALB
-
-
-
-### vimrc settting
-```
-ubuntu@ip-40-40-11-173:~$ cat .vimrc 
-set tabstop=2
-set expandtab
-set shiftwidth=2
-```
-
-
-### tls
-```
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
- -out ingress-tls.crt \
- -keyout ingress-tls.key \
- -subj "/CN=ingress-tls" 
-
-kubectl create secret tls ingress-tls \
---namespace default \
---key ingress-tls.key \
---cert ingress-tls.crt
-```
-
-### tls ingress 
-```
-cat <<EOF | kubectl apply -f -
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: http-go-ingress
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/rewrite-target: /welcome/test
-    nginx.ingress.kubernetes.io/ssl-redirect: "true" # 리다이렉트 설정
-spec:
-  tls:
-  - hosts:
-    - gasbugs.com
-    secretName: ingress-tls
-  rules:
-    - host: gasbugs.com
-      http:
-        paths:
-          - pathType: Exact
-            path: /welcome/test
-            backend:
-              service:
-                name: http-go
-                port:
-                  number: 80
-EOF
-
-```
-
-## sample
-```
-kubectl create deploy http-go --image=gasbugs/http-go
-kubectl expose deploy http-go --port=80 --target-port=8080
-
-kubectl create deploy tomcat --image=consol/tomcat07.0
-kubectl expose deploy tomcat --port=80 --target-port=8080
-
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
- -out gasbugs-tls.crt \
- -keyout gasbugs-tls.key \
- -subj "/CN=gasbugs-tls" 
-
-kubectl create secret tls gasbugs-tls \
---namespace default \
---key gasbugs-tls.key \
---cert gasbugs-tls.crt
-
-
-cat <<EOF | kubectl apply -f -
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: http-go-ingress
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-spec:
-  tls:
-  - hosts:
-    - tomcat.gasbugs.com
-    - http-go.gasbugs.com
-    secretName: gasbugs-tls
-  rules:
-    - host: tomcat.gasbugs.com
-      http:
-        paths:
-          - pathType: Prefix
-            path: /
-            backend:
-              service:
-                name: tomcat
-                port:
-                  number: 80
-    - host: http-go.gasbugs.com
-      http:
-        paths:
-          - pathType: Prefix
-            path: /
-            backend:
-              service:
-                name: http-go
-                port:
-                  number: 80
-EOF
 ```

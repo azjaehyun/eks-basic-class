@@ -25,7 +25,7 @@ echo "********************** Terraform install finish ***********************"
 
 echo "********************** keypair Make Start ***********************"
 
-echo "ssh-keygen을 생성하고 싶으시면 y를 입력 해당 keygen은 aws keypair 등록시 사용됩니다. pass하고 싶으시면 엔터키 입력 "
+echo "ssh-keygen을 생성하고 싶으시면 y를 입력 해당 ssh-keygen은 aws keypair 등록시 사용됩니다. pass하고 싶으시면 엔터키 입력 "
 read keypair_y_value
 if [ "$keypair_y_value" == "y" ]; then
     echo "ssh-keygen key를 생성합니다. key file 이름을 입력해주세요. 본인 영문명을 넣어주시면 됩니다. EX) yangjaehyun "
@@ -73,7 +73,8 @@ echo "********************** 10-pre-requisite End ***********************"
 
 echo "********************** 20 - VPC Make Starting ***********************"
 cat ./arch/terraform-middle/dev/20-vpc-subnet-eks-bastion/terraform.tfvars
-echo "테라폼 벨류 설정 파일이 맞으면 y를 눌러주세요"
+echo "2 tier infra를 구성합니다. public subnet -2 , private subnet -2 ( a & c Zone) "
+echo "테라폼 벨류 설정 파일이 맞으면 y를 눌러주세요."
 read y_value
 
 if [ "$y_value" == "y" ]; then
@@ -90,6 +91,7 @@ echo "********************** 20 - VPC Make End ***********************"
 
 echo "********************** 30 - EKS Make Starting ***********************"
 cat ./arch/terraform-middle/dev/40-eks-getting-started/terraform.tfvars
+echo "private subnet에 eks를 생성합니다. public & private endpoint 로 생성합니다 "
 echo "테라폼 벨류 설정 파일이 맞으면 y를 눌러주세요"
 read y_value
 

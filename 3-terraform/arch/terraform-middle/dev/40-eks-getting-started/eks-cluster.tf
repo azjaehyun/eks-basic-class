@@ -72,13 +72,10 @@ resource "aws_eks_cluster" "master_node" {
     subnet_ids = tolist(data.aws_subnets.private.ids)
     endpoint_private_access = true
     endpoint_public_access  = true
-
-    # Service IPv4 CIDR 설정
-    cluster_ipv4_cidr = "40.40.0.0/16" # vpc 
-    #service_ipv4_cidr = "40.41.0.0/16"
-
-    # subnet - a  40.40.1.0/24
-    # subnet - c  40.40.2.0/24
+  }
+  
+  kubernetes_network_config {
+    service_ipv4_cidr = "40.40.0.0/16"
   }
 
   depends_on = [

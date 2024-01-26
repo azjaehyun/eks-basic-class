@@ -1,49 +1,15 @@
-# eks-basic-class
-eks-basic-class - EKS를 처음 접하는 분
+# eksctl 명령어를 통한 eks 설치 
+- 테라폼을 이용하면 eks가 생성되니 eks가 생성되어 있는 분들은 패스하셔도 됩니다.
+- [공식 도큐먼트](https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/getting-started-eksctl.html)
+- [공식 도큐먼트 yaml 방식 Detail](https://catalog.us-east-1.prod.workshops.aws/workshops/9c0aa9ab-90a9-44a6-abe1-8dff360ae428/ko-KR/50-eks-cluster/100-launch-cluster)  
 
-
-
-## eksctl
+## eksctl 생성 명령어
 ```
-eksctl create cluster --name my-cluster --region region-code
+eksctl create cluster --name {my-cluster} --region {region-code}
+```
+  
+
+## 참고 사이트
+```
 https://awskocaptain.gitbook.io/aws-builders-eks/4.-eksctl
-kubectl -n kube-system describe serviceaccounts aws-load-balancer-controller     
-```
-
-### policy
-```
-curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
-165~166 라인 삭제~
-
-
-
-
-aws iam create-policy \
-    --policy-name AWSLoadBalancerControllerIAMPolicy \
-    --policy-document file://iam_policy.json
-
-eksctl utils associate-iam-oidc-provider --region=us-west-2 --cluster=eks-init-uw2d-eks --approve
-
-eksctl create iamserviceaccount \
-  --cluster=eks-init-uw2d-eks \
-  --namespace=kube-system \
-  --name=aws-load-balancer-controller \
-  --role-name AmazonEKSLoadBalancerControllerRole \
-  --attach-policy-arn=arn:aws:iam::767404772322:policy/AWSLoadBalancerControllerIAMPolicy \
-  --approve \
-  --override-existing-serviceaccounts
-
-checking
-kubectl get serviceaccounts -n kube-system aws-load-balancer-controller -o yaml
-
-
-curl -Lo v2_5_4_full.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.5.4/v2_5_4_full.yaml
-
-
-eksctl delete iamserviceaccount \
-  --cluster=eks-init-uw2d-eks \
-  --namespace=kube-system \
-  --name=aws-load-balancer-controller
-
-
 ```
