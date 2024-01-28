@@ -54,6 +54,17 @@ curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/d
 sudo mv /tmp/eksctl /usr/local/bin
 eksctl version
 
+## aws-iam-authenticator install
+curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/aws-iam-authenticator
+chmod +x ./aws-iam-authenticator
+sudo mv ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
+aws-iam-authenticator version
+
 ## cloud9
 K9S_VERSION=v0.26.7
 curl -sL https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_x86_64.tar.gz | sudo tar xfz - -C /usr/local/bin   
+
+
+## env setting & git clone 
+mkdir ~/.kube
+git clone https://github.com/azjaehyun/eks-basic-class.git ~/eks-basic-class

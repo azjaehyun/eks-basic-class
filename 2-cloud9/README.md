@@ -17,7 +17,14 @@
 
 ### 2. cloud9 생성후 접속 후 환경 셋팅하자 !!!
 - 오른쪽 상단위 톱니바퀴 클릭 -> AWS settings 클릭 -> Credentials [Aws managed temporary credentails] 비활성화 ( 녹색 -> 빨간색으로 버튼 클릭~)  
-
+- vimrc 설정
+```
+vi ~/.vimrc
+set tabstop=2
+set expandtab
+set shiftwidth=2
+추가 후 저장
+```
 
 ---
 ### 3. 왼쪽 깃 sourcec control 클릭 후

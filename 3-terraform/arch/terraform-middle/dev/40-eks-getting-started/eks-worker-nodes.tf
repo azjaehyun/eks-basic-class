@@ -5,7 +5,7 @@
 #
 
 resource "aws_iam_role" "cluster-node" {
-  name = format("%s-eks-node", local.name_prefix)
+  name = format("%s-eks-node", local.name_prefix)  # TODO modify
 
   assume_role_policy = <<POLICY
 {

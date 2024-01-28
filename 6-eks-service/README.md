@@ -15,6 +15,8 @@
   * NodePort
   * CluserIP
 
+## install 가이드
+
 ### aws-load-balancer-controller 설치 document 참고하세요.
 ```
 - https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
@@ -30,18 +32,42 @@
 curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
 ```
   
-- 다운로드후 165~166 라인 삭제 후 아래 명령어 실행.
+
+
+- 다운로드후 160~165 라인 삭제 후 아래 명령어 실행. 아래부분 삭제
+```
+160             "Condition": {
+161                 "Null": {
+162                     "aws:RequestTag/elbv2.k8s.aws/cluster": "true",
+163                     "aws:ResourceTag/elbv2.k8s.aws/cluster": "false"
+164                 }
+165             }
+```
+
+
+- 하지만 bespin-cne 계정에는 이미 만들어져 있기 때문에 아래 명령어 poliy 생성은 생략 가능.
+  * 새로 꼭 생성하고 싶으면 AWSLoadBalancerControllerIAMPolicy 이름을 다른 이름으로 생성!! 
 ```
 aws iam create-policy \
     --policy-name AWSLoadBalancerControllerIAMPolicy \
     --policy-document file://iam_policy.json
 ```
-  
+
+### oidc-provider 설치
+```
+eksctl utils associate-iam-oidc-provider --region=us-west-2 --cluster=eks-basic-uw2d-k8s --approve
+```
+---  
+- 실행후 결과
+```
+2024-01-26 04:34:19 [ℹ]  will create IAM Open ID Connect provider for cluster "eks-basic-uw2d-k8s" in "us-west-2"
+2024-01-26 04:34:19 [✔]  created IAM Open ID Connect provider for cluster "eks-basic-uw2d-k8s" in "us-west-2"
+```
 
 ### aws-load-balancer-controller serviceaccount 생성
 ```
 eksctl create iamserviceaccount \
-  --cluster=eks-init-uw2d-eks \
+  --cluster=eks-basic-uw2d-k8s \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
   --role-name AmazonEKSLoadBalancerControllerRole \
@@ -49,17 +75,48 @@ eksctl create iamserviceaccount \
   --approve \
   --override-existing-serviceaccounts
 ```
+---
+```
+- 실행후 결과 
+2024-01-26 05:00:09 [ℹ]  1 iamserviceaccount (kube-system/aws-load-balancer-controller) was included (based on the include/exclude rules)
+2024-01-26 05:00:09 [!]  metadata of serviceaccounts that exist in Kubernetes will be updated, as --override-existing-serviceaccounts was set
+2024-01-26 05:00:09 [ℹ]  1 task: {
+    2 sequential sub-tasks: {
+        create IAM role for serviceaccount "kube-system/aws-load-balancer-controller",
+        create serviceaccount "kube-system/aws-load-balancer-controller",
+    } }2024-01-26 05:00:09 [ℹ]  building iamserviceaccount stack "eksctl-eks-basic-uw2d-k8s-addon-iamserviceaccount-kube-system-aws-load-balancer-controller"
+2024-01-26 05:00:09 [ℹ]  deploying stack "eksctl-eks-basic-uw2d-k8s-addon-iamserviceaccount-kube-system-aws-load-balancer-controller"
+2024-01-26 05:00:10 [ℹ]  waiting for CloudFormation stack "eksctl-eks-basic-uw2d-k8s-addon-iamserviceaccount-kube-system-aws-load-balancer-controller"
+2024-01-26 05:00:40 [ℹ]  waiting for CloudFormation stack "eksctl-eks-basic-uw2d-k8s-addon-iamserviceaccount-kube-system-aws-load-balancer-controller"
+2024-01-26 05:00:40 [ℹ]  created serviceaccount "kube-system/aws-load-balancer-controller"
+```
 
 
 ### aws-load-balancer-controller serviceacount checking 명령어
 ```
 kubectl get serviceaccounts -n kube-system aws-load-balancer-controller -o yaml
 ```
+---
+- 실행 후 결과
+```
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::767404772322:role/AmazonEKSLoadBalancerControllerRole
+  creationTimestamp: "2024-01-26T05:00:40Z"
+  labels:
+    app.kubernetes.io/managed-by: eksctl
+  name: aws-load-balancer-controller
+  namespace: kube-system
+  resourceVersion: "46593"
+  uid: d820993f-2dc7-41d3-8384-5e9747b8dbdc
+```
 
 ### aws-load-balancer-controller serviceacount delete 명령어
 ```
 eksctl delete iamserviceaccount \
-  --cluster=eks-init-uw2d-eks \
+  --cluster=eks-basic-uw2d-k8s \
   --namespace=kube-system \
   --name=aws-load-balancer-controller
 ```
@@ -72,10 +129,7 @@ eksctl delete iamserviceaccount \
 - 596 ~ 603 line 인 serviceaccount는 삭제!! 왜냐면 위에서 serviceacount 를 생성했기 때문
 
 
-### oidc-provider 설치
-```
-eksctl utils associate-iam-oidc-provider --region=us-west-2 --cluster=eks-init-uw2d-eks --approve
-```
+
 
 ###  [cert manager 설치](https://cert-manager.io/docs/installation/)
 ```

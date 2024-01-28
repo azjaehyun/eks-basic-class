@@ -1,12 +1,14 @@
 # eks-basic-class
 eks-basic-class - EKS를 처음 접하는 분
 
-# [aws ebs csi driver install & delete](https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/managing-ebs-csi.html)
+## ebs csi driver install
+
+### [aws ebs csi driver install & delete](https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/managing-ebs-csi.html)
 ```
-eksctl create addon --name aws-ebs-csi-driver --cluster eks-init-uw2d-eks --service-account-role-arn arn:aws:iam::767404772322:role/AmazonEKS_EBS_CSI_DriverRole --force
+eksctl create addon --name aws-ebs-csi-driver --cluster eks-basic-uw2d-k8s --service-account-role-arn arn:aws:iam::767404772322:role/AmazonEKS_EBS_CSI_DriverRole --force
 
 install check
-eksctl get addon --name aws-ebs-csi-driver --cluster eks-init-uw2d-eks   
+eksctl get addon --name aws-ebs-csi-driver --cluster eks-basic-uw2d-k8s
 ```
 
 ```
