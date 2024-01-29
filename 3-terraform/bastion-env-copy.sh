@@ -16,3 +16,7 @@ echo "********************** bastion에 40-eks-getting-started terraform.tfstate
 scp -i ${ssh_private_key} ./arch/terraform-middle/dev/40-eks-getting-started/terraform.tfstate ubuntu@${bastion_public_ip}:~/eks-basic-class/3-terraform/arch/terraform-middle/dev/40-eks-getting-started/terraform.tfstate
 echo "********************** bastion에 40-eks-getting-started eks-output.txt  파일을 복사합니다. ***********************"
 scp -i ${ssh_private_key} ./eks-output.txt ubuntu@${bastion_public_ip}:~/.kube
+
+
+echo "********************** 아래 명령어로 bastion 서버에 접속합니다. ***********************"
+echo "ssh -i  " ${ssh_private_key}  "   ubuntu@"${bastion_public_ip}
