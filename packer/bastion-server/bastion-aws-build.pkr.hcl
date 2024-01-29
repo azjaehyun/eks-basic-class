@@ -15,7 +15,7 @@ source "amazon-ebs" "amzn2" {
 
   subnet_filter {
     filters = {
-        "tag:Name": "*public*" 
+        "tag:Name": "*default-public*" 
     }
   }
   source_ami_filter {
