@@ -78,7 +78,7 @@ aws efs describe-file-systems --query "FileSystems[*].FileSystemId" --output tex
 ```
 
 - efs 에서 사용할 Security Group을 만들자
-  * SecurtyGroup에서 eks-nas-security 이름으로 생성 
+  * SecurtyGroup에서 eks-nas-security 이름으로 생성 (아래는 생성 )
     - NFS - TCP - 40.40.1.0/24 - private-subnet-a-nas-security 
     - NFS - TCP - 40.40.2.0/24 - private-subnet-c-nas-security 
 
@@ -209,17 +209,5 @@ https://kschoi728.tistory.com/94
 ```
 
 
-# efs 사용하기
-EBS와 EFS의 차이점  
-
-EBS	
-- 하나의 AZ만 접근 가능
-- 처음 설정한 크기
-- GB당 0.116$  
-
-EFS
-- 여러 AZ에서 접근 가능
-- 사용한 만큼 확장
-- GB당 0.33$
 
 
