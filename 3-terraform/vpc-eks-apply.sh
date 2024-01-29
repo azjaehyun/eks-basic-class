@@ -99,6 +99,7 @@ if [ "$y_value" == "y" ]; then
     echo "EKS를 생성합니다."
     terraform -chdir=arch/terraform-middle/dev/40-eks-getting-started init
     terraform -chdir=arch/terraform-middle/dev/40-eks-getting-started apply --auto-approve
+    terraform -chdir=arch/terraform-middle/dev/40-eks-getting-started output > eks-output.txt
 else
     exit 0
     # 추가로 실행할 명령어를 여기에 추가하세요
