@@ -10,17 +10,18 @@ echo "********************** bastion에 ssh private key  파일을 복사합니�
 scp -i ${ssh_private_key} ${ssh_private_key}  ubuntu@${bastion_public_ip}:~/.ssh
 echo "********************** bastion에 10-pre-requisite terraform.tfstate 파일을 복사합니다. ***********************"
 scp -i ${ssh_private_key} ./arch/terraform-middle/dev/10-pre-requisite/terraform.tfstate ubuntu@${bastion_public_ip}:~/eks-basic-class/3-terraform/arch/terraform-middle/dev/10-pre-requisite/terraform.tfstate
-scp -i ${ssh_private_key} ./arch/terraform-middle/dev/10-pre-requisite/terraform.tfstate ubuntu@${bastion_public_ip}:~/eks-basic-class/3-terraform/arch/terraform-middle/dev/10-pre-requisite/.terraform.lock.hcl
-scp -i ${ssh_private_key} ./arch/terraform-middle/dev/10-pre-requisite/terraform.tfstate ubuntu@${bastion_public_ip}:~/eks-basic-class/3-terraform/arch/terraform-middle/dev/10-pre-requisite/.terraform
+scp -i ${ssh_private_key} ./arch/terraform-middle/dev/10-pre-requisite/.terraform.lock.hcl ubuntu@${bastion_public_ip}:~/eks-basic-class/3-terraform/arch/terraform-middle/dev/10-pre-requisite/.terraform.lock.hcl
+scp -i ${ssh_private_key} ./arch/terraform-middle/dev/10-pre-requisite/.terraform ubuntu@${bastion_public_ip}:~/eks-basic-class/3-terraform/arch/terraform-middle/dev/10-pre-requisite/.terraform
 
 echo "********************** bastion에 20-vpc-subnet-eks-bastion terraform.tfstate 파일을 복사합니다. ***********************"
 scp -i ${ssh_private_key} ./arch/terraform-middle/dev/20-vpc-subnet-eks-bastion/terraform.tfstate ubuntu@${bastion_public_ip}:~/eks-basic-class/3-terraform/arch/terraform-middle/dev/20-vpc-subnet-eks-bastion/terraform.tfstate
-scp -i ${ssh_private_key} ./arch/terraform-middle/dev/20-vpc-subnet-eks-bastion/terraform.tfstate ubuntu@${bastion_public_ip}:~/eks-basic-class/3-terraform/arch/terraform-middle/dev/20-vpc-subnet-eks-bastion/.terraform.lock.hcl
-scp -i ${ssh_private_key} ./arch/terraform-middle/dev/20-vpc-subnet-eks-bastion/terraform.tfstate ubuntu@${bastion_public_ip}:~/eks-basic-class/3-terraform/arch/terraform-middle/dev/20-vpc-subnet-eks-bastion/.terraform
+scp -i ${ssh_private_key} ./arch/terraform-middle/dev/20-vpc-subnet-eks-bastion/.terraform.lock.hcl ubuntu@${bastion_public_ip}:~/eks-basic-class/3-terraform/arch/terraform-middle/dev/20-vpc-subnet-eks-bastion/.terraform.lock.hcl
+scp -i ${ssh_private_key} ./arch/terraform-middle/dev/20-vpc-subnet-eks-bastion/.terraform ubuntu@${bastion_public_ip}:~/eks-basic-class/3-terraform/arch/terraform-middle/dev/20-vpc-subnet-eks-bastion/.terraform
+
 echo "********************** bastion에 40-eks-getting-started terraform.tfstate  파일을 복사합니다. ***********************"
 scp -i ${ssh_private_key} ./arch/terraform-middle/dev/40-eks-getting-started/terraform.tfstate ubuntu@${bastion_public_ip}:~/eks-basic-class/3-terraform/arch/terraform-middle/dev/40-eks-getting-started/terraform.tfstate
-scp -i ${ssh_private_key} ./arch/terraform-middle/dev/40-eks-getting-started/terraform.tfstate ubuntu@${bastion_public_ip}:~/eks-basic-class/3-terraform/arch/terraform-middle/dev/40-eks-getting-started/.terraform.lock.hcl
-scp -i ${ssh_private_key} ./arch/terraform-middle/dev/40-eks-getting-started/terraform.tfstate ubuntu@${bastion_public_ip}:~/eks-basic-class/3-terraform/arch/terraform-middle/dev/40-eks-getting-started/.terraform
+scp -i ${ssh_private_key} ./arch/terraform-middle/dev/40-eks-getting-started/.terraform.lock.hcl ubuntu@${bastion_public_ip}:~/eks-basic-class/3-terraform/arch/terraform-middle/dev/40-eks-getting-started/.terraform.lock.hcl
+scp -i ${ssh_private_key} ./arch/terraform-middle/dev/40-eks-getting-started/.terraform ubuntu@${bastion_public_ip}:~/eks-basic-class/3-terraform/arch/terraform-middle/dev/40-eks-getting-started/.terraform
 echo "********************** bastion에 40-eks-getting-started eks-output.txt  파일을 복사합니다. ***********************"
 scp -i ${ssh_private_key} ./eks-output.txt ubuntu@${bastion_public_ip}:~/.kube
 
