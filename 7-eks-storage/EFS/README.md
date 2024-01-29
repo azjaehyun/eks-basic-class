@@ -78,7 +78,7 @@ aws efs describe-file-systems --query "FileSystems[*].FileSystemId" --output tex
 ```
 
 - efs 에서 사용할 Security Group을 만들자
-  * SecurtyGroup에서 eks-nas-security 이름으로 생성 (아래는 생성 )
+  * SecurtyGroup에서 eks-nas-security 이름으로 생성 (생성 파라미터는 아래와 같이)
     - NFS - TCP - 40.40.1.0/24 - private-subnet-a-nas-security 
     - NFS - TCP - 40.40.2.0/24 - private-subnet-c-nas-security 
 

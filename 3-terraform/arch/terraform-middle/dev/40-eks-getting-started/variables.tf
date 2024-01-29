@@ -46,7 +46,8 @@ variable "eks_max_size" {
 
 locals {
   name_prefix               = format("%s-%s%s", var.context.project, var.context.region_alias, var.context.env_alias)
-  cluster_name = format("%s-k8s", local.name_prefix)
+  cluster_name = format("%s-%s-k8s",  var.context.owner , local.name_prefix)
+  
   tags = {
     Project     = var.context.project
     Environment = var.context.environment
