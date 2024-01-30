@@ -146,7 +146,7 @@ context = {
 
 # vpc prefix ip
 vpc_cidr = "40.40"테라폼 벨류 설정 파일이 맞으면 y를 눌러주세요
-ㅛy
+y
 VPC 및 bastion 서버 생성을 실행합니다.
 Initializing modules...
 - aws_ec2_bastion in ../../../../modules/aws/ec2/ec2_bastion
@@ -184,4 +184,59 @@ If you ever set or change modules or backend configuration for Terraform,
 rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
 
+
+... 생략
+
+config_map_aws_auth = <<EOT
+
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aws-auth
+  namespace: kube-system
+data:
+  mapRoles: |
+    - rolearn: arn:aws:iam::767404772322:role/eks-basic-uw2d-yangjaehyun-eks-node
+      username: system:node:{{EC2PrivateDNSName}}
+      groups:
+        - system:bootstrappers
+        - system:nodes
+
+EOT
+kubeconfig = <<EOT
+
+
+apiVersion: v1
+clusters:
+- cluster:
+    server: https://91B0E6B4A6C4915B3DBD73B24B31DC35.gr7.us-west-2.eks.amazonaws.com
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lJTk9EeHUrSFZ3NnN3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5.... 생략 xWdXRvK0NxVXFyTU5KaTVZMURHejE3aGZWUlMKbnBaUmdZVEtITTRjR3VrMU1VcmhqNDhHUXNVTlVDdjluNk9BZ0RJS25nM1cvemE4RHZBR0dCZVJRSUVlbE11UgpDRWgrKzAzUld0WE8vMlBrUW1ZdUp0cTkvUis5T2ZDWDBCd0VPeUVTbnpoVUJWU24weEE0WEZSU0xGU0hGa2ZtCmNTejQ2eTk0K2I4T1BYZmN0L3ltT0JrS051bUJET1JlU0VWTmNnRFVPMXJkQ2owdzlZcmF3Wnd0R0d4aTdpakwKK1lXRk5NSW9kWnhrCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: aws
+  name: aws
+current-context: aws
+kind: Config
+preferences: {}
+users:
+- name: aws
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1beta1
+      command: aws
+      args:
+        - --region
+        - us-west-2
+        - eks
+        - get-token
+        - --cluster-name
+        - eks-basic-uw2d-yangjaehyun-k8s
+      env:
+      - name: AWS_PROFILE
+        value: default
+
+EOT
 ```

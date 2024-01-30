@@ -1,0 +1,1 @@
+### [메트릭 서버 설치 가이드 문서](https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml)
