@@ -39,7 +39,7 @@ metadata:
   labels:
     app: prometheus-app
   name: prometheus-app-svc
-  namespace: default
+  namespace: monitoring
 spec:
   ports:
   - nodePort: 30990
@@ -49,4 +49,3 @@ spec:
   selector:
     app: prometheus-app
   type: NodePort
-출처: https://arisu1000.tistory.com/27857 [아리수:티스토리]
