@@ -39,7 +39,7 @@ metadata:
   labels:
     app: prometheus-app
   name: prometheus-app-svc
-  namespace: default
+  namespace: monitoring
 spec:
   ports:
   - nodePort: 30990
