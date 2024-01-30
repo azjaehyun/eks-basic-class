@@ -55,7 +55,7 @@ aws iam create-policy \
 
 ### oidc-provider 설치
 ```
-eksctl utils associate-iam-oidc-provider --region=us-west-2 --cluster=eks-basic-uw2d-k8s --approve
+eksctl utils associate-iam-oidc-provider --region=us-west-2 --cluster=eks-basic-uw2d-yangjaehyun-k8s --approve
 ```
 ---  
 - 실행후 결과
@@ -67,7 +67,7 @@ eksctl utils associate-iam-oidc-provider --region=us-west-2 --cluster=eks-basic-
 ### aws-load-balancer-controller serviceaccount 생성
 ```
 eksctl create iamserviceaccount \
-  --cluster=eks-basic-uw2d-k8s \
+  --cluster=eks-basic-uw2d-yangjaehyun-k8s \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
   --role-name AmazonEKSLoadBalancerControllerRole \
@@ -116,22 +116,30 @@ metadata:
 ### aws-load-balancer-controller serviceacount delete 명령어
 ```
 eksctl delete iamserviceaccount \
-  --cluster=eks-basic-uw2d-k8s \
+  --cluster=eks-basic-uw2d-yangjaehyun-k8s \
   --namespace=kube-system \
   --name=aws-load-balancer-controller
 ```
 
-### eks에 aws-load-balancer-controller를 설치하자!!   
+###  [cert manager 설치](https://cert-manager.io/docs/installation/)
+```
+kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.4.1/cert-manager.yaml
+```
+
+### eks에 aws-load-balancer-controller를 설치하자!!  [ 설치하기전에 ]
 - [ingress controller yaml down](https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.5.4/v2_5_4_full.yaml)
 - wget https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.5.4/v2_5_4_full.yaml 
 - 해당 파일은 aws-load-balancer-yaml 폴더 안에 있습니다.
-- download 후 863 line에 본인의 클러스터 이름으로 수정!! EX) - --cluster-name=yangjaehyun-cluster
+- download 후 863 line에 본인의 클러스터 이름으로 수정!! EX) - --cluster-name=eks-basic-uw2d-yangjaehyun-k8s
 - 596 ~ 603 line 인 serviceaccount는 삭제!! 왜냐면 위에서 serviceacount 를 생성했기 때문
+- 수정이 완료 되었으면 k8s에 적용하자
+  * 꼭 적용하기전에 위에 선행작업으로 cert-manager.yaml 를 설치해야 한다.
 
-
-
-
-###  [cert manager 설치](https://cert-manager.io/docs/installation/)
 ```
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.3/cert-manager.yaml
+kubectl apply -f v2_5_4_full.yaml 
+```
+
+### aws-load-balancer-controller pod 체크 [ Running 체크 ]
+```
+kubectl get pod -n kube-system | grep aws-load-balancer-controller
 ```

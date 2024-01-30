@@ -28,6 +28,11 @@ source "amazon-ebs" "amzn2" {
     owners      = ["099720109477"]
   }
   ssh_username = "ubuntu"
+
+  tags = {
+    Name        = "jaehyun.yang@bespinglobal.com" # modify your aws account id 
+    Environment = "dev"
+  }
 }
 
 
