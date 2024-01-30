@@ -51,3 +51,8 @@ kubectl get secret --namespace monitoring prom-stack-grafana -o jsonpath="{.data
 ```
 kubectl get secret --namespace monitoring prom-stack-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 ```
+
+---
+
+- ingress와 맵핑하는 법은 본인 숙제 !!!
+  * [팁은 해당 주소 클릭](https://forcloud.tistory.com/206)
