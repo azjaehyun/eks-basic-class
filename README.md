@@ -15,5 +15,5 @@ eks-basic-class - EKS를 처음 접하는 분을 위해서 스터디를 위해 �
 
 - ### 학습 목표 ( Step 2 - 학습기간 : 1달  )  
   * route53과 도메인 연동 
-  * 무료 https 인증서 발급과 ingress에 https(tls) 적용방법 학습
+  * [무료 https 인증서 발급](https://letsencrypt.org/)과 ingress에 https(tls) 적용방법 학습
   * KMS 학습 (선택)
