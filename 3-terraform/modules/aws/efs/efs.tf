@@ -3,7 +3,7 @@
 # EFS 탑재 대상에 연결할 보안 그룹을 생성
 resource "aws_security_group" "efs_sg" {
   name        = var.efs_sg_name
-  description = "Allow SSH inbound traffic"
+  description = "Allow EFS-File-System inbound traffic"
   vpc_id      = var.vpc_id
   # 인바운드: ingress
   ingress {

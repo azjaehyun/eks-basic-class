@@ -11,17 +11,26 @@ eks-basic-class - EKS를 처음 접하는 분
 ---
 
 ### eks endpoint architecture 종류
-- [Public endpoint only](https://aws.amazon.com/ko/about-aws/whats-new/2019/12/amazon-eks-enables-network-access-restrictions-to-kubernetes-cluster-public-endpoints/)
- 
 
-- Public and Private endpoints (일반적인 웹서비스 구축시 사용)
+- [공식 AWS endpoint architecture 종류 가이드 문서](https://aws.amazon.com/ko/blogs/containers/de-mystifying-cluster-networking-for-amazon-eks-worker-nodes/)
+
+  * 각 엔드포인트 별로 차이점을 명확하게 알아야 합니다.  
+
+- [Public endpoint only] ( EKS 테스트용 및 빠른 구축시 사용 )
+ <p align="center"><img src="https://d2908q01vomqb2.cloudfront.net/fe2ef495a1152561572949784c16bf23abb28057/2020/04/10/endpoint_public.png" width="700" height="400"/></p>  
+
+--- 
+
+- [Public and Private endpoints] (일반적인 웹서비스 구축시 사용)
 <p align="center"><img src="https://d2908q01vomqb2.cloudfront.net/fe2ef495a1152561572949784c16bf23abb28057/2020/04/10/endpoint_pubprivate.png" width="700" height="400"/></p>  
 
 <p align="center">아래는 public and private 구성 infra arch 구조</p>
 <p align="center"><img src="https://devblog.kakaostyle.com/img/content/2022-03-31-2/2022-03-31-2-01.png" width="500" height="400"/></p>  
 
 
-- Private endpoint only  (보안이 중요한 서비스 - 금융)
+--- 
+
+- [Private endpoint only]  (보안이 중요한 서비스 - 금융)
 <p align="center"><img src="https://d2908q01vomqb2.cloudfront.net/fe2ef495a1152561572949784c16bf23abb28057/2020/04/10/endpoint_private.png" width="700" height="400"/></p>  
 
 
