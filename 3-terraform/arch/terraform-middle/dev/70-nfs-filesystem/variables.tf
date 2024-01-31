@@ -24,6 +24,8 @@ variable "vpc_cidr" {
 }
 
 
+
+
 locals {
   name_prefix               = format("%s-%s%s", var.context.project, var.context.region_alias, var.context.env_alias)
   cluster_name = format("%s-%s-k8s", local.name_prefix,var.context.owner)

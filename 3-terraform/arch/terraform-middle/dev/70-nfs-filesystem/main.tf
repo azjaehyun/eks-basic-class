@@ -1,13 +1,10 @@
-
 module "aws_nfs_file_system" {
-  nfs_name = "nfs_name"
-  nfs_service_ports = ["2049","2049"]
-  source     = "../../../../modules/aws/efs"
-  vpc_id     = data.aws_vpc.this.id
-  private_subnet_1_id = data.aws_subnets.private[0]
-  private_subnet_2_id = data.aws_subnets.private[1]
-  #availability_zone = "${var.context.aws_region}a"
-  
+  efs_sg_name = format("%s-%s-efs-sg", local.name_prefix,var.context.owner)  
+  source  = "../../../../modules/aws/efs"
+  vpc_id  = data.aws_vpc.this.id
+  private_subnets  = toset(data.aws_subnets.private.ids)
+  tag_name = merge(local.tags, {Name = format("%s-%s-efs", local.name_prefix,var.context.owner)})
+  cidr_block = ["${var.vpc_cidr}.1.0/24","${var.vpc_cidr}.2.0/24"]
 }
 
 
