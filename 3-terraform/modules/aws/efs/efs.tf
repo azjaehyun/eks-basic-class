@@ -2,31 +2,29 @@
 
 # EFS 탑재 대상에 연결할 보안 그룹을 생성
 resource "aws_security_group" "efs_sg" {
-  name        = var.nfs_name
+  name        = var.efs_sg_name
   description = "Allow SSH inbound traffic"
   vpc_id      = var.vpc_id
   # 인바운드: ingress
-  #ingress {
-  #  description = "SSH from VPC"
+  ingress {
+    description = "SSH from VPC"
 
     # 포트 범위: from_port ~ to_port
-    #from_port   = 2049
-    #to_port     = 2049
-    #protocol    = "tcp"
-    #cidr_blocks = [""]
-  #}
-
-
-  dynamic "ingress" {
-    description = "${var.nfs_service_ports} SSH from VPC"
-    for_each = var.nfs_service_ports
-    content {
-      from_port = ingress.value
-      to_port   = ingress.value
-      protocol  = "tcp"
-    }
+    from_port   = 2049
+    to_port     = 2049
+    protocol    = "tcp"
+    cidr_blocks = ["40.40.1.0/24"]
   }
-  # 아웃바운드: egress
+  ingress {
+    description = "SSH from VPC"
+
+    # 포트 범위: from_port ~ to_port
+    from_port   = 2049
+    to_port     = 2049
+    protocol    = "tcp"
+    cidr_blocks = ["40.40.2.0/24"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -62,18 +60,20 @@ resource "aws_efs_file_system" "efs" {
   lifecycle_policy {
     transition_to_ia = "AFTER_30_DAYS"
   }
+  tags = var.tag_name
+ 
 }
 
 
 # 표준 클래스로 EFS를 생성하더라도 탑재 대상은 모든 가용영역에 수동으로 지정해주어야 합니다. 
 resource "aws_efs_mount_target" "mount-1" {
   file_system_id  = aws_efs_file_system.efs.id
-  subnet_id       = var.private_subnet_1_id
+  subnet_id       = var.private_subnets[0]
   security_groups = [aws_security_group.efs_sg.id]
 }
 
 resource "aws_efs_mount_target" "mount-2" {
   file_system_id  = aws_efs_file_system.efs.id
-  subnet_id       = var.private_subnet_2_id
+  subnet_id       = var.private_subnets[1]
   security_groups = [aws_security_group.efs_sg.id]
 }
