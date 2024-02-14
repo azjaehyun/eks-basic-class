@@ -8,14 +8,14 @@ packer {
 }
 
 source "amazon-ebs" "amzn2" {
-  ami_name      = "eks-bastion-packer-ubuntu" # modify
-  instance_type = "t2.micro"
-  region        = "us-west-2"
+  ami_name      = "eks-bastion-packer-ubuntu" # AMI 이름을 지정해주세요.
+  instance_type = "t2.micro" # 인스턴스 타입
+  region        = "us-west-2" # 생성할 리전 명시
 
 
   subnet_filter {
     filters = {
-        "tag:Name": "*default-public*" 
+        "tag:Name": "*default-public*"  #subnet 필터. public subnet A zone 에 이름을 default-public으로 변경해주세요.
     }
   }
   source_ami_filter {
@@ -30,7 +30,7 @@ source "amazon-ebs" "amzn2" {
   ssh_username = "ubuntu"
 
   tags = {
-    Name        = "jaehyun.yang@bespinglobal.com" # modify your aws account id 
+    Name        = "jaehyun.yang@bespinglobal.com" # 본인의 계정 아이디를 넣어주세요.
     Environment = "dev"
   }
 }

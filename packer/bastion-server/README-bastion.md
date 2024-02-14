@@ -1,15 +1,35 @@
-# ansible bastion 
+## packer bastion ami 만들기 
 
-## [packer document](https://developer.hashicorp.com/packer/tutorials/aws-get-started)
+### [packer document](https://developer.hashicorp.com/packer/tutorials/aws-get-started)
 
 To build the bastion AMI:
 
+### cloud9(Amazon Linux 타입에) Packer 설치하기
+```
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+sudo yum -y install packer
+``` 
+### Packer 설치 확인
+```
+which packer
+packer version
+packer -autocomplete-install  #자동완성 설정
+```
 
-### pakcer 변수 수정
+### pakcer 변수 수정 ( bastion-aws-build.pkr.hcl 파일 수정 )
+```
 - vi bastion-aws-build.pkr.hcl 입력후 11번 라인 ami_name 이름인 eks-bastion-packer-ubuntu 이름 수정
 - 본인 이름앞에 프리픽스로 넣어서 수정하기 EX) yangjaehyun-eks-bastion-packer-ubuntu
-- 수정 완료후 아래 명령어 실행
+- 또한 #으로 주석친 부분 자신의 정보로 변경
+```
+
+### packer AMI 생성 실행
 ```
 packer init bastion-aws-build.pkr.hcl
 packer build bastion-aws-build.pkr.hcl
 ```
+
+### 완료후 EC2 -> 왼쪽메뉴에 이미지 -> AMI 들어가서 생성되었는지 확인!!
+
+### 생성완료된 AMI 오른쪽 마우스 클릭 AMI로 인스턴스 시작 클릭후 bastion server 생성하기!
