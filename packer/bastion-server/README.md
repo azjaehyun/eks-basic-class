@@ -4,7 +4,7 @@
 
 To build the bastion AMI:
 
-### cloud9(Amazon Linux 타입에) Packer 설치하기
+### cloud9 환경에서(OS type : Amazon Linux) Packer 설치하기
 ```
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
