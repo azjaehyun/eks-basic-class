@@ -34,7 +34,7 @@ https://jodies.de/ipcalc
   * [cidr 계산기](https://jodies.de/ipcalc)   
 - subnet란? - 방
   * vpc 가상의 공간안에서 방이라고 생각하면 쉽다.  
-  * 방 종류는 공개방와 비공개방 2종류  
+  * 방 종류는 공개방[public subent]와 비공개방[private subnet] 2종류  
     방의 크기는 뭘로 결정?  
     방의 크기 또한 바로 cidr 값으로 결정 – 편하게 계산기 돌리자!!
   
