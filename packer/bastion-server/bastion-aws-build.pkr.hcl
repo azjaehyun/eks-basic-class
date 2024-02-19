@@ -15,7 +15,7 @@ source "amazon-ebs" "amzn2" {
 
   subnet_filter {
     filters = {
-        "tag:Name": "*default-public*"  #subnet 필터. public subnet A zone 에 이름을 default-public으로 변경해주세요.
+        "tag:Name": "*default-public*"  #subnet 필터. default public subnet A zone 에 이름을 default-public으로 변경해주세요.
     }
   }
   source_ami_filter {
