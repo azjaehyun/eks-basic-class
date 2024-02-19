@@ -24,6 +24,9 @@ packer -autocomplete-install  #자동완성 설정
 - 또한 #으로 주석친 부분 자신의 정보로 변경
 ```
 
+### default subnet 4개 중에 Avaible zone - A 에 있는 이름을 default-public 으로 이름 변경
+- 해당 내용은 bastion-aws-build.pkr.hcl 파일 18라인 때문에 특정 subnet을 지정해야하기 때문.
+
 ### packer AMI 생성 실행
 ```
 packer init bastion-aws-build.pkr.hcl
