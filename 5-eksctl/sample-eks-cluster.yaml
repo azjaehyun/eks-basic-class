@@ -18,7 +18,7 @@ vpc:
 
 metadata:
   name: jaehyun-eks-cluster  # 생성할 eks 클러스터 명 입력
-  region: us-west-2
+  region: us-west-2 # 생성할 리전명 입력
   version: "1.28" # k8s 버전 입력
 
 nodeGroups:
