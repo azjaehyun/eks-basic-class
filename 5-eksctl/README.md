@@ -129,8 +129,8 @@ vi eks.yaml 생성후 아래 내용 복사해서 붙여넣기 # 부분은 본인
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
-iam:
-  withOIDC: true # iam.withOIDC: Amazon CNI 플러그인에 대해 IAM OIDC 공급자와 IRSA를 활성화합니다. 후에 alb-ingress-controller 와 같은 addons 를 설치하기 위해 필요.
+#iam:
+#  withOIDC: true # iam.withOIDC: Amazon CNI 플러그인에 대해 IAM OIDC 공급자와 IRSA를 활성화합니다. 후에 alb-ingress-controller 와 같은 addons 를 설치하기 위해 필요.
 
 vpc:
   clusterEndpoints:
@@ -139,14 +139,14 @@ vpc:
   id: "vpc-06f026f2d216c0330" # eks 올릴 vpc id
   subnets:
     private:
-      us-west-2a:  # 본인이 생성한 AZ zone 입력 
+      us-west-2a:  # 본인이 생성한 AZ zone 입력
           id: "subnet-0c62b0df644bf146d"  #  eks 올릴 private subnet id
       us-west-2b:  # 본인이 생성한 AZ zone 입력 c면은 us-west-2c 로 입력
           id: "subnet-0f7d6984c0a0a101e"  #  eks 올릴 private subnet id
 
 metadata:
   name: jaehyun-eks-cluster  # 생성할 eks 클러스터 명 입력
-  region: us-west-2 # 생성할 리전명 입력
+  region: us-west-2
   version: "1.28" # k8s 버전 입력
 
 nodeGroups:
@@ -162,12 +162,12 @@ nodeGroups:
         imageBuilder: true
     ssh:
       publicKeyPath: ~/.ssh/jaehyun-keypair.pub
-      sourceSecurityGroupIds: ["sg-abcd"] # 설정하고 싶을시 추가 
+      #  sourceSecurityGroupIds: ["sg-abcd"] # 설정하고 싶을시 추가
 ```
 
 ## eksctl create - cluster yaml file  
 ```
-eksctl create -f eks.yaml
+eksctl create cluster -f eks.yaml
 ```
 
 
