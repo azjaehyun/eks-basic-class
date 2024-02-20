@@ -15,6 +15,19 @@ eks 셋팅시 subnet 셋팅 주의점!!
 ## eksctl 생성 명령어
 ```
 eksctl create cluster --name {my-cluster} --region {region-code}
+
+eksctl create cluster \
+--version 1.28 \
+--name jaehyun-eks \
+--vpc-nat-mode HighlyAvailable \
+--node-private-networking \
+--region us-west-2 \
+--node-type t2.medium \
+--nodes 1 \
+--with-oidc \
+--ssh-access \
+--ssh-public-key jaehyun-keypair \
+--managed
 ```
 
 ## eksctl 생성 로그
@@ -129,10 +142,8 @@ vi eks.yaml 생성후 아래 내용 복사해서 붙여넣기 # 부분은 본인
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
-#iam:
-#  withOIDC: true # iam.withOIDC: Amazon CNI 플러그인에 대해 IAM OIDC 공급자와 IRSA를 활성화합니다. 후에 alb-ingress-controller 와 같은 addons 를 설치하기 위해 필요.
-
 vpc:
+  cidr: "10.0.0.0/16" # 클러스터에서 사용할 VPC의 CIDR
   clusterEndpoints:
     publicAccess:  true
     privateAccess: true
@@ -140,16 +151,17 @@ vpc:
   subnets:
     private:
       us-west-2a:  # 본인이 생성한 AZ zone 입력
-          id: "subnet-0c62b0df644bf146d"  #  eks 올릴 private subnet id
+          id: "subnet-0ed01380f0a50862e"  #  eks 올릴 private subnet id
       us-west-2b:  # 본인이 생성한 AZ zone 입력 c면은 us-west-2c 로 입력
-          id: "subnet-0f7d6984c0a0a101e"  #  eks 올릴 private subnet id
+          id: "subnet-058aa0ca602b3242d"  #  eks 올릴 private subnet id
 
 metadata:
   name: jaehyun-eks-cluster  # 생성할 eks 클러스터 명 입력
   region: us-west-2
   version: "1.28" # k8s 버전 입력
 
-nodeGroups:
+
+managedNodeGroups:
   - name: jaehyun-eks-node-grp #  eks 노드명 입력
     labels: { Owner: jaehyun }
     instanceType: t2.medium # 노드 인스턴스 타입 입력
@@ -159,10 +171,11 @@ nodeGroups:
     privateNetworking: true
     iam:
       withAddonPolicies:
-        imageBuilder: true
-    ssh:
-      publicKeyPath: ~/.ssh/jaehyun-keypair.pub
-      #  sourceSecurityGroupIds: ["sg-abcd"] # 설정하고 싶을시 추가
+        imageBuilder: true # Amazon ECR에 대한 권한 추가
+        #albIngress: true  # albIngress에 대한 권한 추가
+        #cloudWatch: true # cloudWatch에 대한 권한 추가
+        #autoScaler: true # auto scaling에 대한 권한 추가
+        #ebs: true # EBS CSI Driver에 대한 권한 추가
 ```
 
 ## eksctl create - cluster yaml file  
@@ -170,6 +183,17 @@ nodeGroups:
 eksctl create cluster -f eks.yaml
 ```
 
+## EKS 보안 관련 설정
+- 여기까지 하면 상용에서 사용할 수 있도록 HA를 고려한 secure 한 방법으로 Kubernets cluster 가 생성된다.   
+  하지만 보안을 위해 한가지를 더 해주어야 한다. 현재 상태는 cluster endpoint가 public 하게 허용되어 있다.  
+- [amazon-eks-worker-nodes 공식 문서](https://aws.amazon.com/blogs/containers/de-mystifying-cluster-networking-for-amazon-eks-worker-nodes/) 
+- [cluster-endpoint 공식 문서](https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
+
+이를 제약하기 위해 private access 를 허용하고 CIDR 블록 제한으로 bastion 서버에서만 kubernetes 에 명령을 내릴 수 있도록 수정한다. bastion server의 Public IPv4 address 를 입력한다.
+```
+$ eksctl utils update-cluster-endpoints --cluster={my-cluster-name} --private-access=true --public-access=true --approve
+$ eksctl utils set-public-access-cidrs --cluster={my-cluster-name} {my-bastion-private-ip}/32 --approve
+```
 
 ## 참고 사이트
 ```
