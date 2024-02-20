@@ -123,32 +123,51 @@ aws eks --region {my-region} update-kubeconfig --name {my-cluster-name}
 kubectl describe  configmap aws-auth -n kube-system 
 ```
 
-## [eksctl cluster yaml file](https://eksctl.io/usage/nodegroup-managed/)
+## [eksctl cluster yaml file](https://eksctl.io/usage/schema/)
+vi eks.yaml 생성후 아래 내용 복사해서 붙여넣기 # 부분은 본인의 정보로 입력
 ```
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
-metadata:
-  name: flux-cluster
-  region: us-east-2
-  version: "1.23"
+iam:
+  withOIDC: true # iam.withOIDC: Amazon CNI 플러그인에 대해 IAM OIDC 공급자와 IRSA를 활성화합니다. 후에 alb-ingress-controller 와 같은 addons 를 설치하기 위해 필요.
 
-availabilityZones: ["us-east-2b", "us-east-2c"]
-managedNodeGroups:
-  - name: workers
-    instanceType: hpc6a.48xlarge
-    minSize: 64
-    maxSize: 64
-    labels: { "fluxoperator": "true" }
-    availabilityZones: ["us-east-2b"]   
-    efaEnabled: true
-    placement:
-      groupName: eks-efa-testing
+vpc:
+  clusterEndpoints:
+    publicAccess:  true
+    privateAccess: true
+  id: "vpc-06f026f2d216c0330" # eks 올릴 vpc id
+  subnets:
+    private:
+      us-west-2a:  # 본인이 생성한 AZ zone 입력 
+          id: "subnet-0c62b0df644bf146d"  #  eks 올릴 private subnet id
+      us-west-2b:  # 본인이 생성한 AZ zone 입력 c면은 us-west-2c 로 입력
+          id: "subnet-0f7d6984c0a0a101e"  #  eks 올릴 private subnet id
+
+metadata:
+  name: jaehyun-eks-cluster  # 생성할 eks 클러스터 명 입력
+  region: us-west-2
+  version: "1.28" # k8s 버전 입력
+
+nodeGroups:
+  - name: jaehyun-eks-node-grp #  eks 노드명 입력
+    labels: { Owner: jaehyun }
+    instanceType: t2.medium # 노드 인스턴스 타입 입력
+    desiredCapacity: 1 # 노드 갯수 입력
+    minSize: 1
+    maxSize: 1
+    privateNetworking: true
+    iam:
+      withAddonPolicies:
+        imageBuilder: true
+    ssh:
+      publicKeyPath: ~/.ssh/jaehyun-keypair.pub
+      sourceSecurityGroupIds: ["sg-abcd"] # 설정하고 싶을시 추가 
 ```
 
 ## eksctl create - cluster yaml file  
 ```
-eksctl create nodegroup --config-file=YOUR_CLUSTER.yaml
+eksctl create -f eks.yaml
 ```
 
 
