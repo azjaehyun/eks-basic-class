@@ -195,6 +195,11 @@ $ eksctl utils update-cluster-endpoints --cluster={my-cluster-name} --private-ac
 $ eksctl utils set-public-access-cidrs --cluster={my-cluster-name} {my-bastion-private-ip}/32 --approve
 ```
 
+## eks cluster config 얻기
+```
+aws eks update-kubeconfig --region us-west-2 --name kubeflow-jaehyun
+```
+
 ## 참고 사이트
 ```
 https://awskocaptain.gitbook.io/aws-builders-eks/4.-eksctl
