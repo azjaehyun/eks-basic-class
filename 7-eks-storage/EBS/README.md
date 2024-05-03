@@ -2,6 +2,16 @@
 eks-basic-class - EKS를 처음 접하는 분
 
 ## ebs csi driver install
+```
+eksctl create iamserviceaccount \
+    --name ebs-csi-controller-sa \
+    --namespace kube-system \
+    --cluster eks-basic-uw2d-yangjaehyun-k8s \
+    --role-name AmazonEKS_EBS_CSI_DriverRole \
+    --role-only \
+    --attach-policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy \
+    --approve
+```
 
 ### [aws ebs csi driver install & delete](https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/managing-ebs-csi.html)
 ```
